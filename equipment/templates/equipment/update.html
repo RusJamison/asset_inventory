@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="mt-4">
+    <h2>{{title}}</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="equipment-info">
+            <h5>Equipment Information</h5>
+            <div class="row">
+                <div class="col-md-3">
+                    {{form.asset_tag|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.model|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.category|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    {{form.name|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.manufacturer|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.purchase_order_number|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.price|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    {{form.description|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.serial_no|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.status|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.service_provider|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    {{form.user_manual|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{form.image|as_crispy_field}}
+                </div>
+            </div>
+
+        </div>
+        <div class="facility-info mt-4">
+            <h5>Location</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="facility">Facility</label>
+                    <select name="facilities" id="facilities" class="form-control">
+                        <option value="{{facility.id}}" selected disabled>{{facility.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="department">Department</label>
+                    <select name="department" id="departments" class="form-control">
+                        <option selected disabled>---Select department -----</option>
+                        {% for department in departments %}
+                        <option value="{{department.health_facility_id}}">{{department.name}}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn bg-dark text-white mt-4">Update</button>
+        <a href="{% url 'index' %}" class="btn btn-info mt-4">Back</a>
+    </form>
+</div>
+{% endblock content %}

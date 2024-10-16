@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="mt-4">
+    <h2>{{title}}</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="equipment-info" style="border: 4px solid green; padding: 20px; border-radius: 10px;">
+            <h5>Equipment Information</h5>
+            <div class="row">
+                <div class="col-md-3">
+                    {{form.asset_tag|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.serial_no|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.model|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.category|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    {{form.name|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.price|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.manufacturer|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{form.notes|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    {{form.description|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{form.status|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{form.service_provider|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    {{form.warranty_start_date|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{form.warranty_end_date|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{form.in_use_as_of_date|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    {{form.purchase_order_number|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{form.user_manual|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{form.image|as_crispy_field}}
+                </div>
+            </div>
+
+        </div>
+        <div class="facility-info mt-4" style="border: 4px solid green; padding: 20px; border-radius: 10px;">
+            <h5>Location</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="facility">Facility</label>
+                    <select name="facilities" id="facilities" class="form-control">
+                        <option selected disabled>---Select Health Facility -----</option>
+                        {% for facility in facilities %}
+                        <option value="{{facility.id}}">{{facility.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="department">Department</label>
+                    <select name="department" id="departments" class="form-control">
+                        <option selected disabled>---Select department -----</option>
+                        {% for department in departments %}
+                        <option value="{{department.health_facility_id}}">{{department.name}}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn bg-dark text-white mt-4">Save</button>
+        <button type="submit" class="mt-4 btn btn-primary" name="save_and_add">Save and Add Another</button>
+        <button type="submit" class="mt-4 btn btn-info" name="save_and_duplicate">Duplicate</button>
+
+    </form>
+</div>
+{% endblock content %}

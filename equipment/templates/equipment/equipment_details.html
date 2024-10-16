@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">{{equipment.name}}</h3>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-6">
+                    <div class="white-box text-center"><img src="{{equipment.image.url}}" class="img-responsive"></div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-6">
+                    <h4 class="box-title mt-5">Description</h4>
+                    <p>{{ equipment.description }}</p>
+                </div>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active btn text-success" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            type="button" role="tab" aria-controls="home" aria-selected="true">General Equipment
+                            Info</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-success" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                            type="button" role="tab" aria-controls="profile" aria-selected="false">Facility
+                            Info</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-success" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">Scheduled Work
+                            Orders</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-success" id="contact-tab" data-bs-toggle="tab" data-bs-target="#repairs"
+                            type="button" role="tab" aria-controls="repairs" aria-selected="false">Unscheduled Work
+                            Orders</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h3 class="box-title mt-5">General Equipment Info</h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-product">
+                                    <tbody>
+                                        <tr>
+                                            <td width="390">Asset Tag</td>
+                                            <td>{{equipment.asset_tag}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Serial No.</td>
+                                            <td>{{equipment.serial_no}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Description</td>
+                                            <td>{{equipment.description}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Manufacturer</td>
+                                            <td>{{equipment.manufacturer}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Price</td>
+                                            <td>{{equipment.price}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status</td>
+                                            <td>{{equipment.status}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>category</td>
+                                            <td>{{equipment.category}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Purchase Order</td>
+                                            <td>{{equipment.purchase_order}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>User Manual</td>
+                                            <td>{{equipment.user_manual}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>warranty Start Date</td>
+                                            <td>{{equipment.warranty_start_date}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>warranty End Date</td>
+                                            <td>{{equipment.warranty_end_date}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>In use as of</td>
+                                            <td>{{equipment.in_use_as_of_date}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Notes</td>
+                                            <td>{{ equipment.notes }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date Added</td>
+                                            <td>{{ equipment.created_at }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h3 class="box-title mt-5">Health Facility Info</h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-product">
+                                    <tbody>
+                                        <tr>
+                                            <td width="390">Name</td>
+                                            <td>{{equipment.health_facility.name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Location</td>
+                                            <td>{{equipment.health_facility.location}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h3 class="box-title mt-5">Scheduled Work Orders</h3>
+                            <table class="table table-success table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="fs-6">Work Order Number</th>
+                                        <th class="fs-6">Equipment Asset Tag</th>
+                                        <th class="fs-6">Name</th>
+                                        <th class="fs-6">Scheduled Action</th>
+                                        <th class="fs-6">Purchase Order</th>
+                                        <th class="fs-6">Last Serviced</th>
+                                        <th class="fs-6">Frequency Interval</th>
+                                        <th class="fs-6">Next Scheduled Action Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for work_order in equipment.scheduled_events.all %}
+                                    <tr>
+                                        <td>{{ work_order.work_order_num}}</td>
+                                        <td>{{ work_order.equipment.asset_tag}}</td>
+                                        <td>{{work_order.equipment.name}}</td>
+                                        <td>{{ work_order.scheduled_action }}</td>
+                                        <td>{{ work_order.purchase_order }}</td>
+                                        <td>{{ work_order.last_serviced_at}}</td>
+                                        <td>{{ work_order.freq_interval }}</td>
+                                        <td>{{work_order.next_scheduled_action_date}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="repairs" role="tabpanel" aria-labelledby="repairs-tab">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h3 class="box-title mt-5">Unscheduled Work Orders</h3>
+                            <table class="table table-success table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Work Order Number</th>
+                                        <th>Equipment Asset Tag</th>
+                                        <th>Equiqment Name</th>
+                                        <th>Purchase Order</th>
+                                        <th>Status</th>
+                                        <th>Work Carried</th>
+                                        <th>Created At</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    {% for work_order in equipment.unscheduled_work_orders.all %}
+                                    <tr>
+                                        <td>{{ work_order.work_order_num}}</td>
+                                        <td>{{ work_order.equipment.asset_tag}}</td>
+                                        <td>{{ work_order.equipment.serial_no}}</td>
+                                        <td>{{ work_order.purchase_order }}</td>
+                                        <td>{{ work_order.status }}</td>
+                                        <td>{{ work_order.work_carried }}</td>
+                                        <td>{{ work_order.created_at }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

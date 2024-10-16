@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-4">
+    <h1>Scheduled Work Orders</h1>
+<table class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th class="text-sm">Work Order Number</th>
+            <th class="text-sm">Equipment Asset Tag</th>
+            <th class="text-sm">Name</th>
+            <th class="text-sm">Description</th>
+            <th class="text-sm">Scheduled Action</th>
+            <th class="text-sm">Purchase Order</th>
+            <th class="text-sm">Frequency Interval</th>
+            <th class="text-sm">Frequency</th>
+            <th class="text-sm">Next Scheduled Action Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for work_order in work_orders %}
+        <tr>
+            <td>{{ work_order.work_order_num}}</td>
+            <td>{{ work_order.equipment.asset_tag}}</td>
+            <td>{{work_order.equipment.name}}</td>
+            <td>{{ work_order.equipment.description }}</td>
+            <td>{{ work_order.scheduled_action }}</td>
+            <td>{{ work_order.purchase_order }}</td/>
+            <td>${{ work_order.freq_interval }}</td>
+            <td>{{ work_order.frequency }}</td>
+            <td>{{work_order.next_scheduled_action_date}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+{% endblock content %}

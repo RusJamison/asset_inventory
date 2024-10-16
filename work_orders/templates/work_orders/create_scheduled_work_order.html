@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="mt-4">
+    <h2>{{title}}</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="equipment-info" style="border: 4px solid green; padding: 20px; border-radius: 10px;">
+            <h5>Equipment Information</h5>
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-3">
+                        {{equipment_form.asset_tag|as_crispy_field}}
+                    </div>
+                    <div class="col-md-3">
+                        {{equipment_form.serial_no|as_crispy_field}}
+                    </div>
+                    <div class="col-md-3">
+                        {{equipment_form.model|as_crispy_field}}
+                    </div>
+                    <div class="col-md-3">
+                        {{equipment_form.category|as_crispy_field}}
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    {{equipment_form.name|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{equipment_form.price|as_crispy_field}}
+                </div>
+                <div class="col-md-3">
+                    {{equipment_form.manufacturer|as_crispy_field}}
+                </div>
+
+                {% comment %}
+                <div class="col-md-3">
+                    {{equipment_form.notes|as_crispy_field}}
+                </div>
+                {% endcomment %}
+
+            </div>
+
+        </div>
+        <div class="work-order-info mt-4" style="border: 4px solid green; padding: 20px; border-radius: 10px;">
+            <h5>Work Order</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    {{work_order_form.work_order_num|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{work_order_form.scheduled_action|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{work_order_form.purchase_order|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    {{work_order_form.freq_interval|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{work_order_form.frequency|as_crispy_field}}
+                </div>
+                <div class="col-md-4">
+                    {{work_order_form.next_scheduled_action_date|as_crispy_field}}
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn bg-dark text-white mt-4">Save</button>
+    </form>
+</div>
+{% endblock content %}

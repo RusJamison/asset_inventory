@@ -31,6 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '8000-rusjamison-assetinvento-r0h57g8dv6d.ws.codeinstitute-ide.net',
+    '8080-rusjamison-assetinvento-r0h57g8dv6d.ws.codeinstitute-ide.net',
     '.herokuapp.com']
 
 

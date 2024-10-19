@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign Up" %}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            <h3>{% trans "Sign In" %}</h3>
+
+            <p>{% blocktrans %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktrans %}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            {% url 'account_signup' as signup_url %}
+            <form action="{{signup_url}}" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group mt-2" >
+                        {{field | as_crispy_field}}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="mt-2 btn btn-lg btn-success">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

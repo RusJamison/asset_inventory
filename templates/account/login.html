@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            <h3>{% trans "Sign In" %}</h3>
+
+            <p>{% blocktrans %}Welcome back to the Asset Inventory Management System. To leave a comment or like a post, please log in. If
+                you
+                have not created an account yet, then <a class="link" href="{{ signup_url }}">sign up</a>
+                first.{% endblocktrans %}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            {% url 'account_login' as login_url %}
+            <form action="{{login_url}}" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group mt-2" >
+                        {{field | as_crispy_field}}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="mt-2 btn btn-lg btn-success">Sign In</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -18,11 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import render
 
-
+def homepage(request):
+    return render(request, 'home.html')
 
 urlpatterns = [
+    path('', homepage, name='homepage'),
     path('admin/', admin.site.urls),
-    path('',include('equipment.urls'), name='equipment'),
+    path('summernote/', include('django_summernote.urls')),
+    path('equipment/',include('equipment.urls'), name='equipment'),
     path('work_orders/', include('work_orders.urls')),
-    path('auth/', include('auth.urls')),
+    path("accounts/", include("allauth.urls")),
+   # path('auth/', include('auth.urls')),
 ]

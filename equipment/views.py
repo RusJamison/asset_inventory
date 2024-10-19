@@ -15,7 +15,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def hello(request):
+def equipment_list(request):
     equipment_list = Equipment.objects.all()
     print(equipment_list)
 

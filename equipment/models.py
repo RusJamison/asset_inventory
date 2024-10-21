@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 class StatusChoices(models.TextChoices):
@@ -22,12 +23,12 @@ class Equipment(models.Model):
     serial_no = models.CharField(max_length=200)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to="equipment_images/", null=True, blank=True)
+    image =CloudinaryField(resource_type="image")
     notes = models.TextField(null=True)
     manufacturer = models.ForeignKey(
         "Manufacturer", on_delete=models.CASCADE, related_name="equipments"
     )
-    user_manual = models.FileField(upload_to="equipment_images/")
+    user_manual =CloudinaryField(resource_type="raw")
     status = models.CharField(
         max_length=250, choices=StatusChoices.choices, default=StatusChoices.IN_USE
     )

@@ -1,5 +1,6 @@
 from django.db import models
 from equipment.models import Equipment
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class ScheduledEventChoices(models.TextChoices):
@@ -54,7 +55,7 @@ class UnscheduledWorkOrder(models.Model):
     )
     problem = models.TextField()
     work_carried = models.CharField(max_length=200)
-    work_order_report = models.FileField(null=True,blank=True)
+    work_order_report = CloudinaryField(resource_type="raw")
     purchase_order = models.IntegerField(null=True, blank=True)
     update = models.TextField()
     status = models.CharField(max_length=10, choices= WorKOrderStatus.choices, default="Open")

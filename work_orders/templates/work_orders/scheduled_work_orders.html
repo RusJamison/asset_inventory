@@ -12,8 +12,8 @@
                 <th class="text-sm">Description</th>
                 <th class="text-sm">Scheduled Action</th>
                 <th class="text-sm">Purchase Order</th>
+                <th class="text-sm">Frequency Interval</th>
                 <th class="text-sm">Last Serviced At</th>
-                <th class="text-sm">Frequency</th>
                 <th class="text-sm">Next Scheduled Action Date</th>
             </tr>
         </thead>
@@ -26,8 +26,8 @@
                 <td>{{ work_order.equipment.description }}</td>
                 <td>{{ work_order.scheduled_action }}</td>
                 <td>{{ work_order.purchase_order }}</td>
+                <td>{{ work_order.freq_interval }}</td>
                 <td>{{ work_order.last_serviced_at }}</td>
-                <td>{{ work_order.frequency }}</td>
                 <td>{{work_order.next_scheduled_action_date}}</td>
             </tr>
             {% endfor %}

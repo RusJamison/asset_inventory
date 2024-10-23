@@ -72,7 +72,7 @@ def create_equipment(request):
 
             else:
 
-                return redirect(reverse("index"))
+                return redirect(reverse("equipment_list"))
 
         print(form.errors)
 
@@ -108,7 +108,7 @@ def update_equipment(request, asset_tag):
 
         if form.is_valid():
             form.save()
-            return redirect(reverse("index"))
+            return redirect(reverse("equipment_list"))
 
     context = {
         "title": f"Update Equipment {equipment.name}",

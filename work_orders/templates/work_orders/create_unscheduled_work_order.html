@@ -53,21 +53,30 @@
                     <div class="col-md-4">
                         {{work_order_form.problem|as_crispy_field}}
                     </div>
+                    <div class="col-md-4">
+                        {{work_order_form.purchase_order|as_crispy_field}}
+                    </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         {{work_order_form.work_carried|as_crispy_field}}
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         {{work_order_form.work_order_report|as_crispy_field}}
+                    </div>
+                    <div class="col-md-4">
+                        {{work_order_form.status|as_crispy_field}}
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         {{work_order_form.update|as_crispy_field}}
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         {{work_order_form.date_of_update|as_crispy_field}}
+                    </div>
+                    <div class="col-md-4">
+                        {{work_order_form.closed_at|as_crispy_field}}
                     </div>
                 </div>
             </div>

@@ -29,11 +29,11 @@ class ScheduledWorkOrder(models.Model):
     )
     purchase_order = models.IntegerField(null=True, blank=True)
     freq_interval = models.CharField(max_length=225,choices=IntervalChoices.choices, default="Yearly")
-    frequency = models.IntegerField()
+    last_serviced_at = models.DateField()
     next_scheduled_action_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    last_serviced_at = models.DateTimeField()
+    
 
     def __str__(self):
         return f"Work Order for equipment {self.equipment.asset_tag} NO {self.work_order_num}"
@@ -58,7 +58,7 @@ class UnscheduledWorkOrder(models.Model):
     work_order_report = CloudinaryField(resource_type="raw")
     purchase_order = models.IntegerField(null=True, blank=True)
     update = models.TextField()
-    status = models.CharField(max_length=10, choices= WorKOrderStatus.choices, default="Open")
+    status = models.CharField(max_length=100, blank=True, choices= WorKOrderStatus.choices, default="Open")
     closed_at = models.DateTimeField(blank=True, null=True)
     date_of_update = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)

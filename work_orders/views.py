@@ -52,7 +52,7 @@ def create_unscheduled_work_order(request, asset_tag):
     
 
     if request.method == "POST":
-        form = UnScheduleWorkOrderForm(request.POST)
+        form = UnScheduleWorkOrderForm(request.POST, request.FILES)
 
 
         if form.is_valid():

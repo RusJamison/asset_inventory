@@ -4,32 +4,38 @@
     <h1>Unscheduled Work Orders</h1>
 
 <div class="table-responsive">
-    <table class="table table-success table-striped">
-        <thead>
-            <tr>
-                <th>Work Order Number</th>
-                <th>Equipment Asset Tag</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Problem</th>
-                <th>Work Carried</th>
-            </tr> 
-        </thead>
-        <tbody>
-            {% for equipment in equipments %}
-            <tr>
-                <td>{{ equipment.asset_tag}}</td>
-                <td>{{ equipment.serial_no}}</td>
-                <td><a href="{% url 'edit_equipment' asset_tag=equipment.asset_tag %}">{{ equipment.name }}</a></td>
-                <td>{{ equipment.description }}</td>
-                <td>{{ equipment.manufacturer }}</td>
-                <td>${{ equipment.price }}</td>
-                <td>{{ equipment.status }}</td>
-                <td><a href="{% url 'delete_equipment' asset_tag=equipment.asset_tag %}">Delete</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+   <table class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th>Equipment Asset Tag</th>
+            <th>Serial No</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Work Order Number</th>
+            <th>Problem</th>
+            <th>Work Carried</th>
+            <th>Status</th>
+        </tr> 
+    </thead>
+    <tbody>
+        {% for work_order in work_orders %}
+        <tr>
+            <td>{{ work_order.equipment.asset_tag}}</td>
+            <td>{{ work_order.equipment.serial_no}}</td>
+            <td><a href="{% url 'edit_equipment' asset_tag=work_order.equipment.asset_tag %}">{{ work_order.equipment.name }}</a></td>
+            <td>{{ work_order.equipment.description }}</td>
+            <td>{{ work_order.work_order_num}}</td>
+            <td>{{ work_order.problem}}</td>
+            <td>{{ work_order.work_carried }}</td>
+            <td>{{ work_order.status }}</td>
+            <td></td>
+           
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 </div>
 
 </div>

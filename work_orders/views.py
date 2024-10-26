@@ -4,15 +4,16 @@ from .forms import ScheduledWorkOrderForm, UnScheduleWorkOrderForm
 from django.urls import reverse
 from equipment.models import Equipment
 from equipment.forms import EquipmentCreationForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-
+@login_required()
 def scheduled_work_orders(request):
     work_orders = ScheduledWorkOrder.objects.all()
     context = {"title": "Scheduled Work Orders","work_orders":work_orders}
     return render(request, "work_orders/scheduled_work_orders.html", context=context)
 
-
+@login_required()
 def create_scheduled_work_order(request, asset_tag):
     equipment = Equipment.objects.get(asset_tag=asset_tag)
     equipment_form = EquipmentCreationForm(instance=equipment)
@@ -37,13 +38,13 @@ def create_scheduled_work_order(request, asset_tag):
     }
     return render(request, "work_orders/create_scheduled_work_order.html", context)
 
-
+@login_required()
 def unscheduled_work_orders(request):
     work_orders = UnscheduledWorkOrder.objects.all()
     context = {"title": "Unscheduled Work Orders","work_orders":work_orders}
     return render(request, "work_orders/unscheduled_work_orders.html", context=context)
 
-
+@login_required()
 def create_unscheduled_work_order(request, asset_tag):
     form = UnScheduleWorkOrderForm()
     

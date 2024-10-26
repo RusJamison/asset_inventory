@@ -62,6 +62,10 @@
                 </li>
                 {% endif %}
             </div>
+            <form class="d-flex" action="{% url 'search_equipment' %}">
+              <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-info" type="submit">Search</button>
+            </form>
           </nav>
     </header>
     <main class="container" style="min-height: 80vh;">

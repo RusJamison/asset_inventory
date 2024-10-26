@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-4">
+    <h1>Search Results</h1>
+<table class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">Asset Tag</th>
+            <th class="text-center">Serial No.</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Manufacturer</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Actions</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equipment in equipments %}
+        <tr>
+            <td class="text-center">{{ equipment.asset_tag}}</td>
+            <td class="text-center">{{ equipment.serial_no}}</td>
+            <td class="text-center"><a href="{% url 'equipment_details' asset_tag=equipment.asset_tag %}">{{ equipment.name }}</a></td>
+            <td class="text-center">{{ equipment.description }}</td>
+            <td class="text-center">{{ equipment.manufacturer }}</td>
+            <td class="text-center">${{ equipment.price }}</td>
+            <td class="text-center">{{ equipment.status }}</td>
+            <td class="text-center"><a href="{% url 'delete_equipment' asset_tag=equipment.asset_tag %}" class="btn text-danger"><i class="fa-solid fa-trash"></i></a></td>
+            <td class="text-center"><a href="{% url 'edit_equipment' asset_tag=equipment.asset_tag %}" class="btn text-info"><i class="fa-solid fa-pencil"></i></a></td>
+            <td class="text-center"><a href="{% url 'create_scheduled_work_order' asset_tag=equipment.asset_tag %}" class="btn btn-info">Add PM</a></td>
+            <td class="text-center"><a href="{% url 'create_unscheduled_work_order' asset_tag=equipment.asset_tag %}" class="btn btn-primary">Add Repair</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock content %}

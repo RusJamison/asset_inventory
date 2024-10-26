@@ -6,6 +6,8 @@ from .forms import (
     EquipmentUpdateForm,
 )
 import logging
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 
@@ -14,7 +16,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
+@login_required()
 def equipment_list(request):
     equipment_list = Equipment.objects.all()
     print(equipment_list)
@@ -22,7 +24,7 @@ def equipment_list(request):
     context = {"title": "Home Page", "equipments": equipment_list}
     return render(request, "equipment/index.html", context=context)
 
-
+@login_required()
 def create_equipment(request):
     form = EquipmentCreationForm()
     departments = Department.objects.all()
@@ -84,7 +86,7 @@ def create_equipment(request):
     }
     return render(request, "equipment/create.html", context=context)
 
-
+@login_required()
 def equipment_details(request, asset_tag):
     equipment = Equipment.objects.get(asset_tag=asset_tag)
     facility = equipment.health_facility
@@ -95,7 +97,7 @@ def equipment_details(request, asset_tag):
     }
     return render(request, "equipment/equipment_details.html", context=context)
 
-
+@login_required()
 def update_equipment(request, asset_tag):
     equipment = Equipment.objects.get(asset_tag=asset_tag)
     facility = equipment.health_facility
@@ -117,7 +119,7 @@ def update_equipment(request, asset_tag):
     }
     return render(request, "equipment/update.html", context=context)
 
-
+@login_required()
 def delete_equipment(request, asset_tag):
     equipment = Equipment.objects.get(asset_tag=asset_tag)
 
@@ -126,6 +128,19 @@ def delete_equipment(request, asset_tag):
         return redirect(reverse("index"))
 
     return render(request, "equipment/delete.html", {"equipment": equipment})
+
+@login_required()
+def search_equipment(request):
+    query = request.GET.get('search')
+    results = Equipment.objects.filter(
+            Q(asset_tag__icontains=query) |
+            Q(name__icontains=query) |
+            Q(model__icontains=query) |
+            Q(serial_no__icontains=query) 
+           # Q(manufacturer__icontains=query)
+        )
+    context = {"title": "Home Page", "equipments": results}
+    return render(request,'equipment/search.html', context = context)
 
 
 #def about(request):

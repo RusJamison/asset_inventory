@@ -22,7 +22,12 @@
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
             {% url 'account_login' as login_url %}
-            <form action="{{login_url}}" method="post">
+            {%comment%}<form action="{{login_url}}" method="post">{%endcomment%}
+                {% if next %}
+                <form action="{{login}}?next={{next}}" method="post" >
+                {%else%}
+                <form action="{{login}}" method="post">
+                {% endif %}    
                 {% if form.errors %}
                 {% for field in form %}
                 {% for error in field.errors %}

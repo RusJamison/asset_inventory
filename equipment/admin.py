@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Equipment, Category, Manufacturer, HealthFacility, Department, ServiceProvider
+from .models import Equipment, Category, EquipmentLocation, Manufacturer, HealthFacility, Department, ServiceProvider
 from django_summernote.admin import SummernoteModelAdmin
 
 @admin.register(Equipment)
@@ -16,5 +16,6 @@ admin.site.register(Manufacturer)
 admin.site.register(HealthFacility)
 admin.site.register(Department)
 admin.site.register(ServiceProvider)
+admin.site.register(EquipmentLocation)
 
 

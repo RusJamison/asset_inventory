@@ -37,9 +37,7 @@ class Equipment(models.Model):
     category = models.ForeignKey(
         "Category", on_delete=models.CASCADE, related_name="equipments"
     )
-    health_facility = models.ForeignKey(
-        "HealthFacility", on_delete=models.CASCADE, related_name="equipments"
-    )
+    location = models.ForeignKey("EquipmentLocation",on_delete=models.CASCADE)
     warranty_start_date = models.DateField()
     warranty_end_date = models.DateField()
     in_use_as_of_date = models.DateField()
@@ -108,6 +106,13 @@ class Department(models.Model):
     class Meta:
         verbose_name_plural = "Departments"
 
+class EquipmentLocation(models.Model):
+    """Relates an equipment to a location and a department"""
+    health_facility = models.ForeignKey(HealthFacility, related_name="equipment_location",on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, related_name="equipment_location",on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.health_facility.name} and departmet {self.department.name}"
 
 class ServiceProvider(models.Model):
     name = models.CharField(max_length=50)
@@ -119,6 +124,9 @@ class ServiceProvider(models.Model):
 
     class Meta:
         verbose_name_plural = "Service Providers"
+
+
+
 
 
 

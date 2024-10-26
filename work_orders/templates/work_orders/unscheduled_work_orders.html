@@ -16,6 +16,8 @@
             <th>Problem</th>
             <th>Work Carried</th>
             <th>Status</th>
+            <th>Facility</th>
+            <th>Department</th>
         </tr> 
     </thead>
     <tbody>
@@ -29,6 +31,8 @@
             <td>{{ work_order.problem}}</td>
             <td>{{ work_order.work_carried }}</td>
             <td>{{ work_order.status }}</td>
+            <td>{{ work_order.equipment.location.health_facility }}</td>
+            <td>{{ work_order.equipment.location.department }}</td>
             <td></td>
            
         </tr>

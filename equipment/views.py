@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Equipment, HealthFacility, Department
+from .models import Equipment, HealthFacility, Department, EquipmentLocation
 from .forms import (
     EquipmentCreationForm,
     EquipmentUpdateForm,
@@ -36,13 +36,19 @@ def create_equipment(request):
         form = EquipmentCreationForm(request.POST, request.FILES)
         post_data = request.POST
 
-        facility = HealthFacility.objects.get(id=post_data.get("facilities"))
+
         department = Department.objects.get(id=post_data.get("department"))
-        print(f"post data:{post_data}")
+        facility = HealthFacility.objects.get(id=post_data.get("facilities"))
+        location_record = EquipmentLocation.objects.create(
+            health_facility=facility,
+            department=department,
+        )
+
         if form.is_valid():
             equipment = form.save(commit=False)
-            equipment.health_facility = facility
+            equipment.location = location_record
             equipment.save()
+            
 
             if "save_and_add" in request.POST:
                 return redirect(reverse("create_equipment"))

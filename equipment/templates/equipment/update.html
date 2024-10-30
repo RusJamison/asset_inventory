@@ -61,16 +61,18 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="facility">Facility</label>
-                    <select name="facilities" id="facilities" class="form-control">
-                        <option value="{{facility.id}}" selected disabled>{{facility.name}}</option>
+                    <select name="facility"  class="form-control">
+                       {% for facility in facilities %}
+                        <option value="{{facility.id}}">{{facility.name}}</option>
+                       {% endfor %}
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="department">Department</label>
-                    <select name="department" id="departments" class="form-control">
-                        <option selected disabled>---Select department -----</option>
-                        {% for department in departments %}
-                        <option value="{{department.health_facility_id}}">{{department.name}}</option>
+                    <select name="department" class="form-control">
+                        <option>---Select department -----</option>
+                        {% for department in departments%}
+                        <option value="{{department.id}}">{{department.name}}</option>
                         {% endfor %}
 
                     </select>
@@ -82,3 +84,4 @@
     </form>
 </div>
 {% endblock content %}
+

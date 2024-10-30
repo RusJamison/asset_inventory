@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Search Results for "{{ query }}"</h2>
+{% if results %}
+<div class="table-responsive">
+    <table class="table table-success table-striped">
+        <thead>
+            <th>Search Results</th>
+        </thead>
+        <tbody>
+            {% for item in results %}
+            {% if item.entity == 'Equipment' %}
+            <td><a href="{% url 'equipment_details' item.item.asset_tag %}" class="text-success fw-bold">{{ item.entity}} - {{ item.item.name }} With Asset Tag {{item.item.asset_tag}}</a></td>
+            {% endif %}
+            {% if item.entity == 'ScheduledWorkOrder' %}
+            <td><a href="" class="text-success fw-bold">{{ item.entity}} - with Work Order Number {{ item.item.work_order_num }} for equipment With Asset Tag {{item.item.equipment.asset_tag}}</a></td>
+            {% endif %}
+            {% if item.entity == 'UnscheduledWorkOrder' %}
+            <td><a href="" class="text-success fw-bold">{{ item.entity}} - with Work Order Number {{ item.item.work_order_num }} for equipment With Asset Tag {{item.item.equipment.asset_tag}}</a></td>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>No results found.</p>
+{% endif %}
+{% endblock content %}

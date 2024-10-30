@@ -8,6 +8,7 @@ from .forms import (
 import logging
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from .utils import search_all_models_full_text
 
 # Create your views here.
 
@@ -30,29 +31,27 @@ def create_equipment(request):
     departments = Department.objects.all()
     facilities = HealthFacility.objects.all()
 
-    print(facilities)
-
     if request.method == "POST":
         form = EquipmentCreationForm(request.POST, request.FILES)
         post_data = request.POST
-
-
-        department = Department.objects.get(id=post_data.get("department"))
+        print(post_data.get("department"))
         facility = HealthFacility.objects.get(id=post_data.get("facilities"))
+        department = Department.objects.get(id=post_data.get("department"))
+
         location_record = EquipmentLocation.objects.create(
             health_facility=facility,
             department=department,
         )
 
+
         if form.is_valid():
             equipment = form.save(commit=False)
             equipment.location = location_record
             equipment.save()
-            
 
             if "save_and_add" in request.POST:
                 return redirect(reverse("create_equipment"))
-
+            
             elif "save_and_duplicate" in request.POST:
                 form = EquipmentCreationForm(
                     instance=Equipment(
@@ -61,7 +60,7 @@ def create_equipment(request):
                         name=equipment.name,
                         description=equipment.description,
                         status=equipment.status,
-                        health_facility=facility,
+                        location=location_record,
                         warranty_start_date=equipment.warranty_start_date,
                         warranty_end_date=equipment.warranty_end_date,
                         in_use_as_of_date=equipment.in_use_as_of_date,
@@ -95,7 +94,7 @@ def create_equipment(request):
 @login_required()
 def equipment_details(request, asset_tag):
     equipment = Equipment.objects.get(asset_tag=asset_tag)
-    facility = equipment.health_facility
+    facility = equipment.location.health_facility
     context = {
         "title": f"Equipment Details - {equipment.name}",
         "equipment": equipment,
@@ -106,22 +105,35 @@ def equipment_details(request, asset_tag):
 @login_required()
 def update_equipment(request, asset_tag):
     equipment = Equipment.objects.get(asset_tag=asset_tag)
-    facility = equipment.health_facility
-    print(equipment)
+    departments = Department.objects.all()
+    facilities = HealthFacility.objects.all()
 
     form = EquipmentUpdateForm(instance=equipment)
 
     if request.method == "POST":
+        department_id = request.POST.get('department')
+        facility_id = request.POST.get('facility')
+
+        department = Department.objects.get(id=department_id)
+
+        print(f"Department >>>{department}")
+        facility = HealthFacility.objects.get(id=facility_id)
+
         form = EquipmentUpdateForm(request.POST, request.FILES, instance=equipment)
 
         if form.is_valid():
-            form.save()
+            equipment = form.save(commit=False)
+            equipment.location.health_facility = facility
+            equipment.location.department = department
+            equipment.location.save()
+            equipment.save()
             return redirect(reverse("equipment_list"))
 
     context = {
         "title": f"Update Equipment {equipment.name}",
         "form": form,
-        "facility": facility,
+        "facilities":facilities,
+        "departments":departments
     }
     return render(request, "equipment/update.html", context=context)
 
@@ -131,22 +143,24 @@ def delete_equipment(request, asset_tag):
 
     if request.method == "POST":
         equipment.delete()
-        return redirect(reverse("index"))
+        return redirect(reverse("equipment_list"))
 
     return render(request, "equipment/delete.html", {"equipment": equipment})
 
 @login_required()
-def search_equipment(request):
-    query = request.GET.get('search')
-    results = Equipment.objects.filter(
-            Q(asset_tag__icontains=query) |
-            Q(name__icontains=query) |
-            Q(model__icontains=query) |
-            Q(serial_no__icontains=query) 
-           # Q(manufacturer__icontains=query)
-        )
-    context = {"title": "Home Page", "equipments": results}
-    return render(request,'equipment/search.html', context = context)
+def search_view(request):
+    query = request.GET.get('search', '')
+
+    if query:
+        results = search_all_models_full_text(query)
+        all_items = [{'entity': entity_name, 'item': item} for entity_name, queryset in results.items() for item in queryset]
+        print(all_items)
+        results = all_items
+    else:
+        results = Equipment.objects.none()  # return empty queryset if no search term
+
+    return render(request, 'equipment/search_results.html', {'query': query, 'results': results})
+
 
 
 #def about(request):

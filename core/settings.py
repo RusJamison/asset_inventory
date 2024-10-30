@@ -25,7 +25,7 @@ cloudinary.config(
     cloud_name = os.environ.get("CLOUDINARY_CLOUDNAME"), 
     api_key = os.environ.get("CLOUDINARY_API_KEY"), 
     api_secret = os.environ.get("CLOUDINARY_API_SECRET"), # Click 'View API Keys' above to copy your API secret
-    secure=False
+    secure=True
 )
 
 
@@ -41,7 +41,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c1b)ulc6*fre1)ih*deb4dihjdkybheimd%_fse7tg=y9535m('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '8000-rusjamison-assetinvento-r0h57g8dv6d.ws.codeinstitute-ide.net',
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'cloudinary_storage',
     'django.contrib.sites',
     'allauth',

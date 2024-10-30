@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+i{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="mt-4">
@@ -75,7 +75,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="facility">Facility</label>
-                    <select name="facilities" id="facilities" class="form-control">
+                    <select name="facilities"  class="form-control">
                         <option selected disabled>---Select Health Facility -----</option>
                         {% for facility in facilities %}
                         <option value="{{facility.id}}">{{facility.name}}</option>
@@ -84,10 +84,10 @@
                 </div>
                 <div class="col-md-4">
                     <label for="department">Department</label>
-                    <select name="department" id="departments" class="form-control">
+                    <select name="department" class="form-control">
                         <option selected disabled>---Select department -----</option>
                         {% for department in departments %}
-                        <option value="{{department.health_facility_id}}">{{department.name}}</option>
+                        <option value="{{department.id}}">{{department.name}} - {{department.health_facility.name}}</option>
                         {% endfor %}
 
                     </select>
@@ -101,3 +101,4 @@
     </form>
 </div>
 {% endblock content %}
+

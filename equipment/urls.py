@@ -9,7 +9,7 @@ urlpatterns = [
     path('details/<str:asset_tag>/',views.equipment_details, name='equipment_details'),
     path('edit/<str:asset_tag>/', views.update_equipment, name='edit_equipment'),
     path('delete/<str:asset_tag>/', views.delete_equipment, name='delete_equipment'),
-    path('search/',views.search_equipment, name='search_equipment')
+    path('search/',views.search_view, name='search_equipment')
     #path('equipment_list/', views.equipment_list, name='equipment_list'),
 ]
 

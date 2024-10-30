@@ -37,7 +37,11 @@ class Equipment(models.Model):
     category = models.ForeignKey(
         "Category", on_delete=models.CASCADE, related_name="equipments"
     )
-    location = models.ForeignKey("EquipmentLocation",on_delete=models.CASCADE)
+    location = models.OneToOneField(
+        "EquipmentLocation",
+        related_name="equipment",
+        on_delete=models.CASCADE
+    )
     warranty_start_date = models.DateField()
     warranty_end_date = models.DateField()
     in_use_as_of_date = models.DateField()

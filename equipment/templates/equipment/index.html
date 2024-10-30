@@ -14,6 +14,7 @@
                     <th class="text-center">Description</th>
                     <th class="text-center">Manufacturer</th>
                     <th class="text-center">Price</th>
+                    <th class="text-center">Purchase Order Number</th>
                     <th class="text-center">Status</th>
                     <th class="text-center">Facility</th>
                     <th class="text-center">Department</th>
@@ -34,6 +35,7 @@
                     <td class="text-center">{{ equipment.description }}</td>
                     <td class="text-center">{{ equipment.manufacturer }}</td>
                     <td class="text-center">${{ equipment.price }}</td>
+                    <td class="text-center">{{ equipment.purchase_order_number }}</td>
                     <td class="text-center">{{ equipment.status }}</td>
                     <td class="text-center">{{ equipment.location.health_facility }}</td>
                     <td class="text-center">{{ equipment.location.department }}</td>

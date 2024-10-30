@@ -18,6 +18,7 @@ if os.path.isfile('env.py'):
 
 import cloudinary
 import cloudinary.uploader
+import cloudinary.api
 from cloudinary.utils import cloudinary_url
 
 # Configuration       

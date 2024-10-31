@@ -23,12 +23,12 @@ class Equipment(models.Model):
     serial_no = models.CharField(max_length=200)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image =CloudinaryField(resource_type="image")
-    notes = models.TextField(null=True)
+    image =CloudinaryField(resource_type="image", null=True, blank=True, default=None)
+    notes = models.TextField(null=True, blank=True, default=None)
     manufacturer = models.ForeignKey(
         "Manufacturer", on_delete=models.CASCADE, related_name="equipments"
     )
-    user_manual =CloudinaryField(resource_type="raw")
+    user_manual =CloudinaryField(resource_type="raw", null=True, blank=True, default=None)
     status = models.CharField(
         max_length=250, choices=StatusChoices.choices, default=StatusChoices.IN_USE
     )

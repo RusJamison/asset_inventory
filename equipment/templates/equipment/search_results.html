@@ -10,14 +10,19 @@
         </thead>
         <tbody>
             {% for item in results %}
+            <tr>
             {% if item.entity == 'Equipment' %}
             <td><a href="{% url 'equipment_details' item.item.asset_tag %}" class="text-success fw-bold">{{ item.entity}} - {{ item.item.name }} With Asset Tag {{item.item.asset_tag}}</a></td>
             {% endif %}
             {% if item.entity == 'ScheduledWorkOrder' %}
-            <td><a href="" class="text-success fw-bold">{{ item.entity}} - with Work Order Number {{ item.item.work_order_num }} for equipment With Asset Tag {{item.item.equipment.asset_tag}}</a></td>
+            <td><a href="{% url 'scheduled_work_order_detail' item.item.work_order_num %}" class="text-success fw-bold">{{ item.entity}} - with Work Order Number {{ item.item.work_order_num }} for equipment With Asset Tag {{item.item.equipment.asset_tag}}</a></td>
             {% endif %}
             {% if item.entity == 'UnscheduledWorkOrder' %}
-            <td><a href="" class="text-success fw-bold">{{ item.entity}} - with Work Order Number {{ item.item.work_order_num }} for equipment With Asset Tag {{item.item.equipment.asset_tag}}</a></td>
+            <td><a href="{% url 'unscheduled_work_order_detail' item.item.work_order_num %}" class="text-success fw-bold">{{ item.entity}} - with Work Order Number {{ item.item.work_order_num }} for equipment With Asset Tag {{item.item.equipment.asset_tag}}</a></td>
+            {% endif %}
+            {% if item.entity == 'Department' %}
+            <td><a href="" class="text-success fw-bold">{{ item.entity}} {{item.item.name}} - for Health Facility {{item.item.health_facility.name}}</a></td>
+        </tr>
             {% endif %}
             {% endfor %}
         </tbody>

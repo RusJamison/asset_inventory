@@ -19,7 +19,7 @@ class UnScheduleWorkOrderForm(forms.ModelForm):
         widget=forms.Textarea(attrs={"rows": 3, "class": "form-control"})
     )
     date_of_update = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-    closed_at = forms.DateField(widget=forms.DateInput(attrs={'type': 'date','required':False}))
+    closed_at = forms.DateField(widget=forms.DateInput(attrs={'type': 'date','required':False}), required=False)
     class Meta:
         model = UnscheduledWorkOrder
         fields = []

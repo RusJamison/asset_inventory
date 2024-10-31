@@ -18,7 +18,7 @@ class IntervalChoices(models.TextChoices):
 
 class ScheduledWorkOrder(models.Model):
     """Scheduled and expected"""
-    work_order_num = models.IntegerField(unique=True,primary_key=True)
+    work_order_num= models.IntegerField(unique=True,primary_key=True)
     equipment = models.ForeignKey(
         Equipment, on_delete=models.CASCADE, related_name="scheduled_events"
     )
@@ -56,10 +56,10 @@ class UnscheduledWorkOrder(models.Model):
     problem = models.TextField()
     work_carried = models.CharField(max_length=200)
     work_order_report = CloudinaryField(resource_type="raw")
-    purchase_order = models.IntegerField(null=True, blank=True)
+    purchase_order = models.IntegerField(null=True, blank=True, default=None)
     update = models.TextField()
     status = models.CharField(max_length=100, blank=True, choices= WorKOrderStatus.choices, default="Open")
-    closed_at = models.DateTimeField(blank=True, null=True)
+    closed_at = models.DateTimeField(null=True, blank=True, default=None)
     date_of_update = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

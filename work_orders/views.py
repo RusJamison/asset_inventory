@@ -72,4 +72,20 @@ def create_unscheduled_work_order(request, asset_tag):
 
     return render(request, "work_orders/create_unscheduled_work_order.html", context)
 
+def scheduled_work_order_detail(request, work_order_num):
+    work_order = ScheduledWorkOrder.objects.get(
+        work_order_num = work_order_num
+    )
+    return render(request,"work_orders/scheduled_detail.html",{
+        'work_order':work_order
+    })
+
+def unscheduled_work_order_detail(request, work_order_num):
+    work_order = UnscheduledWorkOrder.objects.get(
+        work_order_num = work_order_num
+    )
+    return render(request,"work_orders/unscheduled_detail.html",{
+        'work_order':work_order
+    })
+
 

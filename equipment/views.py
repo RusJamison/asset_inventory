@@ -94,11 +94,11 @@ def create_equipment(request):
 @login_required()
 def equipment_details(request, asset_tag):
     equipment = Equipment.objects.get(asset_tag=asset_tag)
-    facility = equipment.location.health_facility
+    location = equipment.location
     context = {
         "title": f"Equipment Details - {equipment.name}",
         "equipment": equipment,
-        "facility": facility,
+        "location": location,
     }
     return render(request, "equipment/equipment_details.html", context=context)
 

@@ -7,13 +7,20 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('equipment', '0003_remove_equipment_health_facility_equipmentlocation_and_more'),
+        (
+            "equipment",
+            "0003_remove_equipment_health_facility_equipmentlocation_and_more",
+        ),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='equipment',
-            name='location',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='equipment', to='equipment.equipmentlocation'),
+            model_name="equipment",
+            name="location",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="equipment",
+                to="equipment.equipmentlocation",
+            ),
         ),
     ]

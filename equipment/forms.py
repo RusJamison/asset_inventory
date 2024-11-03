@@ -10,7 +10,10 @@ class EquipmentCreationForm(forms.ModelForm):
     price = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     serial_no = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    notes = forms.CharField(widget=forms.Textarea(attrs={"class": "form-control","rows":3}), required=False) 
+    notes = forms.CharField(
+        widget=forms.Textarea(attrs={"class": "form-control", "rows": 3}),
+        required=False,
+    )
     in_use_as_of_date = forms.DateField(
         widget=forms.DateInput(attrs={"class": "form-control", "type": "date"})
     )
@@ -36,7 +39,7 @@ class EquipmentCreationForm(forms.ModelForm):
             "price",
             "image",
             "serial_no",
-        "user_manual",
+            "user_manual",
             "in_use_as_of_date",
             "warranty_start_date",
             "warranty_end_date",
@@ -50,6 +53,7 @@ class EquipmentUpdateForm(forms.ModelForm):
     description = forms.CharField(
         widget=forms.Textarea(attrs={"rows": 3, "class": "form-control"})
     )
+
     class Meta:
         model = Equipment
         fields = [
@@ -65,5 +69,5 @@ class EquipmentUpdateForm(forms.ModelForm):
             "category",
             "status",
             "service_provider",
-            "purchase_order_number"
+            "purchase_order_number",
         ]

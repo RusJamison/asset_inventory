@@ -1,4 +1,12 @@
-from equipment.models import Equipment, EquipmentLocation,ServiceProvider,Department,Manufacturer, Category,HealthFacility
+from equipment.models import (
+    Equipment,
+    EquipmentLocation,
+    ServiceProvider,
+    Department,
+    Manufacturer,
+    Category,
+    HealthFacility,
+)
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
@@ -7,7 +15,9 @@ from django.urls import reverse
 class EquipmentCreateViewTest(TestCase):
     def setUp(self):
         # Create a test user and log them in
-        self.user = get_user_model().objects.create_user(username="testuser", password="testpass")
+        self.user = get_user_model().objects.create_user(
+            username="testuser", password="testpass"
+        )
         self.client.login(username="testuser", password="testpass")
 
         # Create required related instances
@@ -16,14 +26,20 @@ class EquipmentCreateViewTest(TestCase):
         self.manufacturer = Manufacturer.objects.create(name="Medical Supplies Inc.")
         self.category = Category.objects.create(name="Medical Devices")
         self.health_facility = HealthFacility.objects.create(name="City Hospital")
-        self.service_provider = ServiceProvider.objects.create(name="TechCare Solutions")
-        self.department = Department.objects.create(name="Radiology",health_facility=self.health_facility)
+        self.service_provider = ServiceProvider.objects.create(
+            name="TechCare Solutions"
+        )
+        self.department = Department.objects.create(
+            name="Radiology", health_facility=self.health_facility
+        )
         self.location = EquipmentLocation.objects.create(
             health_facility=self.health_facility,
             department=self.department,
         )
 
-        self.url = reverse("create_equipment")  # Replace with your actual URL name for the create view
+        self.url = reverse(
+            "create_equipment"
+        )  # Replace with your actual URL name for the create view
 
     def test_create_equipment_get(self):
         response = self.client.get(self.url)
@@ -48,7 +64,7 @@ class EquipmentCreateViewTest(TestCase):
             "department": self.department.id,
             "facilities": self.facility.id,
             "manufacturer": self.manufacturer.id,
-            "notes":"some notes",
+            "notes": "some notes",
             "status": "in use",
             "category": self.category.id,
             "service_provider": self.service_provider.id,
@@ -57,8 +73,8 @@ class EquipmentCreateViewTest(TestCase):
             "in_use_as_of_date": "2022-01-15",
             "save_and_duplicate": "Save and Duplicate",
             "purchase_order_number": 12345678,
-            "department_id":self.department.id,
-            "facilities":self.health_facility.id
+            "department_id": self.department.id,
+            "facilities": self.health_facility.id,
         }
 
         response = self.client.post(self.url, post_data)
@@ -78,7 +94,7 @@ class EquipmentCreateViewTest(TestCase):
             "department": self.department.id,
             "facilities": self.facility.id,
             "manufacturer": self.manufacturer.id,
-            "notes":"some notes",
+            "notes": "some notes",
             "status": "in use",
             "category": self.category.id,
             "service_provider": self.service_provider.id,
@@ -86,7 +102,7 @@ class EquipmentCreateViewTest(TestCase):
             "warranty_end_date": "2025-01-01",
             "in_use_as_of_date": "2022-01-15",
             "save_and_duplicate": "Save and Duplicate",
-            "purchase_order_number": 12345678
+            "purchase_order_number": 12345678,
         }
 
         response = self.client.post(self.url, post_data)
@@ -108,7 +124,7 @@ class EquipmentCreateViewTest(TestCase):
             "department": self.department.id,
             "facilities": self.facility.id,
             "manufacturer": self.manufacturer.id,
-            "notes":"some notes",
+            "notes": "some notes",
             "status": "in use",
             "category": self.category.id,
             "service_provider": self.service_provider.id,
@@ -116,7 +132,7 @@ class EquipmentCreateViewTest(TestCase):
             "warranty_end_date": "2025-01-01",
             "in_use_as_of_date": "2022-01-15",
             "save_and_duplicate": "Save and Duplicate",
-            "purchase_order_number": 12345678
+            "purchase_order_number": 12345678,
         }
 
         response = self.client.post(self.url, post_data)

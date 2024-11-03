@@ -1,28 +1,42 @@
-
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from equipment.models import Equipment, Department, HealthFacility, EquipmentLocation, Manufacturer, Category, ServiceProvider
+from equipment.models import (
+    Equipment,
+    Department,
+    HealthFacility,
+    EquipmentLocation,
+    Manufacturer,
+    Category,
+    ServiceProvider,
+)
+
 
 class EquipmentDeleteViewTest(TestCase):
     def setUp(self):
         # Create a test user and log them in
-        self.user = get_user_model().objects.create_user(username="testuser", password="testpass")
+        self.user = get_user_model().objects.create_user(
+            username="testuser", password="testpass"
+        )
         self.client.login(username="testuser", password="testpass")
 
         # Create required related instances
         self.manufacturer = Manufacturer.objects.create(name="Medical Supplies Inc.")
         self.category = Category.objects.create(name="Medical Devices")
         self.health_facility = HealthFacility.objects.create(name="City Hospital")
-        self.service_provider = ServiceProvider.objects.create(name="TechCare Solutions")
-        self.department = Department.objects.create(name="Radiology", health_facility=self.health_facility)
+        self.service_provider = ServiceProvider.objects.create(
+            name="TechCare Solutions"
+        )
+        self.department = Department.objects.create(
+            name="Radiology", health_facility=self.health_facility
+        )
 
         # Create an EquipmentLocation and Equipment instance
         self.location = EquipmentLocation.objects.create(
             health_facility=self.health_facility,
             department=self.department,
         )
-        
+
         self.equipment = Equipment.objects.create(
             name="MRI Machine",
             model="Model MRI-X200",
@@ -62,7 +76,9 @@ class EquipmentDeleteViewTest(TestCase):
         response = self.client.post(url)
 
         # Check if the equipment was deleted
-        self.assertFalse(Equipment.objects.filter(asset_tag=self.equipment.asset_tag).exists())
+        self.assertFalse(
+            Equipment.objects.filter(asset_tag=self.equipment.asset_tag).exists()
+        )
 
         # Verify that the view redirects to the equipment list
         self.assertRedirects(response, reverse("equipment_list"))

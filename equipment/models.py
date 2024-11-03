@@ -9,7 +9,7 @@ class StatusChoices(models.TextChoices):
     DECOMMISIONED = "decommissioned", "decommissioned"
 
 
-#class ManufacturerChoices(models.TextChoices):
+# class ManufacturerChoices(models.TextChoices):
 #    COMPANY_A = "Company A", "Company A"
 #    COMPANY_B = "Company B", "Company B"
 #    COMPANY_C = "Company C", "Company C"
@@ -23,12 +23,14 @@ class Equipment(models.Model):
     serial_no = models.CharField(max_length=200)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image =CloudinaryField(resource_type="image", null=True, blank=True, default=None)
+    image = CloudinaryField(resource_type="image", null=True, blank=True, default=None)
     notes = models.TextField(null=True, blank=True, default=None)
     manufacturer = models.ForeignKey(
         "Manufacturer", on_delete=models.CASCADE, related_name="equipments"
     )
-    user_manual =CloudinaryField(resource_type="raw", null=True, blank=True, default=None)
+    user_manual = CloudinaryField(
+        resource_type="raw", null=True, blank=True, default=None
+    )
     status = models.CharField(
         max_length=250, choices=StatusChoices.choices, default=StatusChoices.IN_USE
     )
@@ -38,9 +40,7 @@ class Equipment(models.Model):
         "Category", on_delete=models.CASCADE, related_name="equipments"
     )
     location = models.OneToOneField(
-        "EquipmentLocation",
-        related_name="equipment",
-        on_delete=models.CASCADE
+        "EquipmentLocation", related_name="equipment", on_delete=models.CASCADE
     )
     warranty_start_date = models.DateField()
     warranty_end_date = models.DateField()
@@ -72,14 +72,14 @@ class Category(models.Model):
 
 
 class Manufacturer(models.Model):
-   name = models.CharField(default='Company', max_length=200)
-   created_at = models.DateTimeField(auto_now_add=True)
-   updated_at = models.DateTimeField(auto_now=True)
+    name = models.CharField(default="Company", max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-   def __str__(self):
+    def __str__(self):
         return self.name
 
-   class Meta:
+    class Meta:
         verbose_name_plural = "Manufacturers"
 
 
@@ -110,13 +110,21 @@ class Department(models.Model):
     class Meta:
         verbose_name_plural = "Departments"
 
+
 class EquipmentLocation(models.Model):
     """Relates an equipment to a location and a department"""
-    health_facility = models.ForeignKey(HealthFacility, related_name="equipment_location",on_delete=models.CASCADE)
-    department = models.ForeignKey(Department, related_name="equipment_location",on_delete=models.CASCADE)
+
+    health_facility = models.ForeignKey(
+        HealthFacility, related_name="equipment_location", on_delete=models.CASCADE
+    )
+    department = models.ForeignKey(
+        Department, related_name="equipment_location", on_delete=models.CASCADE
+    )
 
     def __str__(self):
-        return f"{self.health_facility.name} and departmet {self.department.name}"
+        return f"{self.health_facility.name} and \
+        departmet {self.department.name}"
+
 
 class ServiceProvider(models.Model):
     name = models.CharField(max_length=50)
@@ -128,11 +136,3 @@ class ServiceProvider(models.Model):
 
     class Meta:
         verbose_name_plural = "Service Providers"
-
-
-
-
-
-
-
-

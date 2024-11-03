@@ -7,23 +7,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('equipment', '0004_alter_equipment_location'),
+        ("equipment", "0004_alter_equipment_location"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='equipment',
-            name='image',
-            field=cloudinary.models.CloudinaryField(blank=True, default=None, max_length=255, null=True),
+            model_name="equipment",
+            name="image",
+            field=cloudinary.models.CloudinaryField(
+                blank=True, default=None, max_length=255, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='equipment',
-            name='notes',
+            model_name="equipment",
+            name="notes",
             field=models.TextField(blank=True, default=None, null=True),
         ),
         migrations.AlterField(
-            model_name='equipment',
-            name='user_manual',
-            field=cloudinary.models.CloudinaryField(blank=True, default=None, max_length=255, null=True),
+            model_name="equipment",
+            name="user_manual",
+            field=cloudinary.models.CloudinaryField(
+                blank=True, default=None, max_length=255, null=True
+            ),
         ),
     ]

@@ -129,3 +129,356 @@ Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` f
 ---
 
 Happy coding!
+
+
+<header>
+    <div class="content">
+        <h1>Coverage report:
+            <span class="pc_cov">97%</span>
+        </h1>
+    </div>
+</header>
+<main id="index">
+    <table class="index" data-sortable>
+        <thead>
+            <tr class="tablehead" title="Click to sort">
+                <th id="file" class="name left" aria-sort="none" data-shortcut="f">File<span class="arrows"></span></th>
+                <th id="statements" aria-sort="none" data-default-sort-order="descending" data-shortcut="s">statements<span class="arrows"></span></th>
+                <th id="missing" aria-sort="none" data-default-sort-order="descending" data-shortcut="m">missing<span class="arrows"></span></th>
+                <th id="excluded" aria-sort="none" data-default-sort-order="descending" data-shortcut="x">excluded<span class="arrows"></span></th>
+                <th id="coverage" class="right" aria-sort="none" data-shortcut="c">coverage<span class="arrows"></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="region">
+                <td class="name left"><a href="z_57760688d1f824db___init___py.html">core/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_57760688d1f824db_settings_py.html">core/settings.py</a></td>
+                <td>36</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="36 36">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_57760688d1f824db_urls_py.html">core/urls.py</a></td>
+                <td>8</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="7 8">88%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="env_py.html">env.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_4d6b1bc0a02fa936___init___py.html">equipment/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_4d6b1bc0a02fa936_admin_py.html">equipment/admin.py</a></td>
+                <td>15</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="15 15">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_4d6b1bc0a02fa936_apps_py.html">equipment/apps.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="4 4">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_4d6b1bc0a02fa936_forms_py.html">equipment/forms.py</a></td>
+                <td>22</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="22 22">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_88604d44b496bcbb_0001_initial_py.html">equipment/migrations/0001_initial.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_88604d44b496bcbb_0002_alter_equipment_image_alter_equipment_user_manual_py.html">equipment/migrations/0002_alter_equipment_image_alter_equipment_user_manual.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_88604d44b496bcbb_0003_remove_equipment_health_facility_equipmentlocation_and_more_py.html">equipment/migrations/0003_remove_equipment_health_facility_equipmentlocation_and_more.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_88604d44b496bcbb_0004_alter_equipment_location_py.html">equipment/migrations/0004_alter_equipment_location.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_88604d44b496bcbb_0005_alter_equipment_image_alter_equipment_notes_and_more_py.html">equipment/migrations/0005_alter_equipment_image_alter_equipment_notes_and_more.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_88604d44b496bcbb___init___py.html">equipment/migrations/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_4d6b1bc0a02fa936_models_py.html">equipment/models.py</a></td>
+                <td>81</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="80 81">99%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_1ba715d6592ce959___init___py.html">equipment/tests/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_1ba715d6592ce959_test_create_py.html">equipment/tests/test_create.py</a></td>
+                <td>36</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="36 36">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_1ba715d6592ce959_test_delete_py.html">equipment/tests/test_delete.py</a></td>
+                <td>27</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="27 27">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_1ba715d6592ce959_test_details_py.html">equipment/tests/test_details.py</a></td>
+                <td>30</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="30 30">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_1ba715d6592ce959_test_equipment_list_py.html">equipment/tests/test_equipment_list.py</a></td>
+                <td>32</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="32 32">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_1ba715d6592ce959_test_update_py.html">equipment/tests/test_update.py</a></td>
+                <td>34</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="34 34">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_4d6b1bc0a02fa936_urls_py.html">equipment/urls.py</a></td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_4d6b1bc0a02fa936_utils_py.html">equipment/utils.py</a></td>
+                <td>7</td>
+                <td>3</td>
+                <td>0</td>
+                <td class="right" data-ratio="4 7">57%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_4d6b1bc0a02fa936_views_py.html">equipment/views.py</a></td>
+                <td>86</td>
+                <td>11</td>
+                <td>0</td>
+                <td class="right" data-ratio="75 86">87%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="manage_py.html">manage.py</a></td>
+                <td>11</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="9 11">82%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_2181fedf9a8cec51___init___py.html">work_orders/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_2181fedf9a8cec51_admin_py.html">work_orders/admin.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_2181fedf9a8cec51_apps_py.html">work_orders/apps.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="4 4">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_2181fedf9a8cec51_forms_py.html">work_orders/forms.py</a></td>
+                <td>19</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="19 19">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_8d7ab8a156d2f097_0001_initial_py.html">work_orders/migrations/0001_initial.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_8d7ab8a156d2f097_0002_alter_unscheduledworkorder_work_order_report_py.html">work_orders/migrations/0002_alter_unscheduledworkorder_work_order_report.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_8d7ab8a156d2f097_0003_remove_scheduledworkorder_frequency_and_more_py.html">work_orders/migrations/0003_remove_scheduledworkorder_frequency_and_more.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="4 4">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_8d7ab8a156d2f097_0004_alter_unscheduledworkorder_status_py.html">work_orders/migrations/0004_alter_unscheduledworkorder_status.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="4 4">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_8d7ab8a156d2f097_0005_alter_unscheduledworkorder_closed_at_and_more_py.html">work_orders/migrations/0005_alter_unscheduledworkorder_closed_at_and_more.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="4 4">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_8d7ab8a156d2f097___init___py.html">work_orders/migrations/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_2181fedf9a8cec51_models_py.html">work_orders/models.py</a></td>
+                <td>45</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="43 45">96%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_e84e7565cc1db528___init___py.html">work_orders/tests/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_327a3c517aa378fb___init___py.html">work_orders/tests/scheduled/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_327a3c517aa378fb_test_create_py.html">work_orders/tests/scheduled/test_create.py</a></td>
+                <td>33</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="33 33">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_327a3c517aa378fb_test_list_py.html">work_orders/tests/scheduled/test_list.py</a></td>
+                <td>28</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="28 28">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_b02d463796305c53___init___py.html">work_orders/tests/unscheduled/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_b02d463796305c53_test_create_py.html">work_orders/tests/unscheduled/test_create.py</a></td>
+                <td>36</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="36 36">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_b02d463796305c53_test_list_py.html">work_orders/tests/unscheduled/test_list.py</a></td>
+                <td>31</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="31 31">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_2181fedf9a8cec51_urls_py.html">work_orders/urls.py</a></td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name left"><a href="z_2181fedf9a8cec51_views_py.html">work_orders/views.py</a></td>
+                <td>53</td>
+                <td>5</td>
+                <td>0</td>
+                <td class="right" data-ratio="48 53">91%</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr class="total">
+                <td class="name left">Total</td>
+                <td>743</td>
+                <td>25</td>
+                <td>0</td>
+                <td class="right" data-ratio="718 743">97%</td>
+            </tr>
+        </tfoot>
+    </table>
+   
+</main>
+
+</body>
+</html>
+

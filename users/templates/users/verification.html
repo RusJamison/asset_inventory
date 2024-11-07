@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-4">
+
+    {% if user.is_verified %}
+    <p>Account verified, Please continue to the <a href="{% url 'index' %}">Home Page</a></p>
+    {% else %}
+    <h1>Wait for verification</h1>
+    <p>And admin will verify your account within 24 hours.</p>
+    {% endif %}
+
+</div>
+{% endblock content %}

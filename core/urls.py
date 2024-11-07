@@ -30,5 +30,6 @@ urlpatterns = [
     path('equipment/',include('equipment.urls'), name='equipment'),
     path('work_orders/', include('work_orders.urls')),
     path("accounts/", include("allauth.urls")),
+    path("users/", include("users.urls")),
    # path('auth/', include('auth.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

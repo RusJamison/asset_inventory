@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
+from equipment.models import HealthFacility
 
 # Create your models here.
 
@@ -29,6 +30,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     is_verified = models.BooleanField(default=False)
+    health_facility = models.ForeignKey(HealthFacility, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -20,7 +20,8 @@ logger = logging.getLogger(__name__)
 
 @login_required()
 def equipment_list(request):
-    equipment_list = Equipment.objects.all()
+    user = request.user
+    equipment_list = Equipment.objects.filter(location__health_facility=user.health_facility).all()
     print(equipment_list)
 
     context = {"title": "Home Page", "equipments": equipment_list}

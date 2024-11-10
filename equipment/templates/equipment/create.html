@@ -76,10 +76,8 @@ i{% extends 'base.html' %}
                 <div class="col-md-4">
                     <label for="facility">Facility</label>
                     <select name="facilities"  class="form-control">
-                        <option selected disabled>---Select Health Facility -----</option>
-                        {% for facility in facilities %}
+                        <option selected disabled>---Select Health Facility -----</option>     
                         <option value="{{facility.id}}">{{facility.name}}</option>
-                        {% endfor %}
                     </select>
                 </div>
                 <div class="col-md-4">

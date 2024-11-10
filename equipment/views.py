@@ -21,7 +21,10 @@ logger = logging.getLogger(__name__)
 @login_required()
 def equipment_list(request):
     user = request.user
-    equipment_list = Equipment.objects.filter(location__health_facility=user.health_facility).all()
+    if user.is_superuser:
+        equipment_list = Equipment.objects.all() 
+    else:
+        equipment_list = Equipment.objects.filter(location__health_facility=user.health_facility).all()
     print(equipment_list)
 
     context = {"title": "Home Page", "equipments": equipment_list}
@@ -31,13 +34,13 @@ def equipment_list(request):
 @login_required()
 def create_equipment(request):
     form = EquipmentCreationForm()
-    departments = Department.objects.all()
-    facilities = HealthFacility.objects.all()
+    facility = request.user.health_facility
+    departments = Department.objects.filter(health_facility= facility).all()
 
     if request.method == "POST":
         form = EquipmentCreationForm(request.POST, request.FILES)
         post_data = request.POST
-        print(post_data.get("department"))
+        print(post_data)
         facility = HealthFacility.objects.get(id=post_data.get("facilities"))
         department = Department.objects.get(id=post_data.get("department"))
 
@@ -75,7 +78,7 @@ def create_equipment(request):
                     "title": "Create Equipment",
                     "form": form,
                     "departments": departments,
-                    "facilities": facilities,
+                    "facility": facility,
                 }
                 return render(request, "equipment/create.html", context=context)
 
@@ -86,11 +89,11 @@ def create_equipment(request):
         print(form.errors)
 
     context = {
-        "title": "Create Equipment",
-        "form": form,
-        "departments": departments,
-        "facilities": facilities,
-    }
+                    "title": "Create Equipment",
+                    "form": form,
+                    "departments": departments,
+                    "facility": facility,
+                }
     return render(request, "equipment/create.html", context=context)
 
 
@@ -109,8 +112,8 @@ def equipment_details(request, asset_tag):
 @login_required()
 def update_equipment(request, asset_tag):
     equipment = Equipment.objects.get(asset_tag=asset_tag)
-    departments = Department.objects.all()
-    facilities = HealthFacility.objects.all()
+    facility = request.user.health_facility
+    departments = Department.objects.filter(health_facility= facility).all()
 
     form = EquipmentUpdateForm(instance=equipment)
 
@@ -134,11 +137,11 @@ def update_equipment(request, asset_tag):
             return redirect(reverse("equipment_list"))
 
     context = {
-        "title": f"Update Equipment {equipment.name}",
-        "form": form,
-        "facilities": facilities,
-        "departments": departments,
-    }
+                    "title": "Create Equipment",
+                    "form": form,
+                    "departments": departments,
+                    "facility": facility,
+                }
     return render(request, "equipment/update.html", context=context)
 
 

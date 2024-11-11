@@ -36,6 +36,7 @@ from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
+@login_required()
 def generate_equipment_pdf(request):
     # Create a BytesIO buffer to receive PDF data
     buffer = BytesIO()
@@ -64,7 +65,8 @@ def generate_equipment_pdf(request):
     elements.append(Spacer(1, 12))
 
     # Query all Equipment objects
-    equipments = Equipment.objects.all().order_by('-created_at')
+    user = request.user
+    equipments = Equipment.objects.filter(location__health_facility=user.health_facility).all().order_by('-created_at')
 
     # Define table data with headers
     table_data = [

@@ -132,7 +132,7 @@ def equipment_list(request):
     else:
         equipment_list = Equipment.objects.filter(location__health_facility=user.health_facility).all()
     print(equipment_list)
-    paginator = Paginator(equipment_list, 3)
+    paginator = Paginator(equipment_list, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {"title": "Home Page", "page_obj": page_obj}

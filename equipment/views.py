@@ -9,6 +9,7 @@ import logging
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .utils import search_all_models_full_text
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -16,6 +17,109 @@ from .utils import search_all_models_full_text
 # 2. map function to A URL
 
 logger = logging.getLogger(__name__)
+
+import logging
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from django.http import HttpResponse
+from reportlab.lib.pagesizes import letter, A4
+from reportlab.pdfgen import canvas
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from .models import Equipment
+from io import BytesIO
+# import requests
+from django.conf import settings
+
+
+logger = logging.getLogger(__name__)
+
+def generate_equipment_pdf(request):
+    # Create a BytesIO buffer to receive PDF data
+    buffer = BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    doc = SimpleDocTemplate(buffer, pagesize=A4)
+
+    # Container for the 'Flowable' objects
+    elements = []
+
+    # Get sample styles
+    styles = getSampleStyleSheet()
+    title_style = styles['Title']
+    header_style = styles['Heading2']
+    normal_style = styles['BodyText']
+
+    # Add Title
+    title = Paragraph("Equipment List", title_style)
+    elements.append(title)
+    elements.append(Spacer(1, 12))
+
+    # Add a description or any introductory text
+    intro_text = "This document contains a list of all equipment in the inventory."
+    intro_paragraph = Paragraph(intro_text, normal_style)
+    elements.append(intro_paragraph)
+    elements.append(Spacer(1, 12))
+
+    # Query all Equipment objects
+    equipments = Equipment.objects.all().order_by('-created_at')
+
+    # Define table data with headers
+    table_data = [
+        ['Asset Tag', 'Name', 'Model', 'Serial No', 'Price', 'Status', 'Location']
+    ]
+
+    # Populate table data
+    for equipment in equipments:
+        table_data.append([
+            equipment.asset_tag,
+            equipment.name,
+            equipment.model,
+            equipment.serial_no,
+            f"${equipment.price}",
+            equipment.status,
+            equipment.location.health_facility if equipment.location else "N/A",
+        ])
+
+    # Create the table
+    table = Table(table_data, repeatRows=1)
+
+    # Style the table
+    table_style = TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#d3d3d3")),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+    ])
+    table.setStyle(table_style)
+
+    # Alternate row colors
+    for i in range(1, len(table_data)):
+        if i % 2 == 0:
+            bg_color = colors.whitesmoke
+        else:
+            bg_color = colors.lightgrey
+        table_style.add('BACKGROUND', (0, i), (-1, i), bg_color)
+
+    elements.append(table)
+    elements.append(Spacer(1, 24))
+
+
+    # Build the PDF
+    doc.build(elements)
+
+    # Get the value of the BytesIO buffer and write it to the response.
+    pdf = buffer.getvalue()
+    buffer.close()
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="equipment_list.pdf"'
+    response.write(pdf)
+    return response
+
 
 
 @login_required()
@@ -26,8 +130,10 @@ def equipment_list(request):
     else:
         equipment_list = Equipment.objects.filter(location__health_facility=user.health_facility).all()
     print(equipment_list)
-
-    context = {"title": "Home Page", "equipments": equipment_list}
+    paginator = Paginator(equipment_list, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {"title": "Home Page", "page_obj": page_obj}
     return render(request, "equipment/index.html", context=context)
 
 

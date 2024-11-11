@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for equipment in equipments %}
+                {% for equipment in page_obj %}
                 <tr>
                     <td class="text-center">{{ equipment.asset_tag}}</td>
                     <td class="text-center">{{ equipment.serial_no}}</td>
@@ -53,7 +53,7 @@
                 {% endfor %}
             </tbody>
         </table>
-
+        {% include 'pagination.html'%}
     </div>
 </div>
 {% endblock content %}

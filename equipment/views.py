@@ -224,7 +224,6 @@ def equipment_details(request, asset_tag):
 def update_equipment(request, asset_tag):
     equipment = Equipment.objects.get(asset_tag=asset_tag)
     facility = request.user.health_facility
-    facility = request.user.health_facility
     facilities = HealthFacility.objects.all()
 
     departments_in_facility = Department.objects.filter(health_facility=facility).all()
@@ -235,6 +234,8 @@ def update_equipment(request, asset_tag):
     if request.method == "POST":
         department_id = request.POST.get("department")
         facility_id = request.POST.get("facilities")
+        print(f"Facility_id>>>{request.POST}")
+
 
         department = Department.objects.get(id=department_id)
 
@@ -255,7 +256,7 @@ def update_equipment(request, asset_tag):
         "title": f"Update Equipment {equipment.name}",
         "form": form,
         "departments": all_departments,
-        "facility_deps": departments_in_facility,
+        "facility_depts": departments_in_facility,
         "facility": facility,
         "facilities": facilities,
                 }

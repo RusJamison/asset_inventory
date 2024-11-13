@@ -71,24 +71,34 @@
                     </select>
                     {% else %}
                     <select name="facilities" class="form-control">
-                        <option value="{{facility.id}}" selected disabled>{{facility.name}}</option>
+                        <option value="{{facility.id}}">{{facility.name}}</option>
                     </select>
-                    {% endif %}         
-                    </div>
-                    <div class="col-md-4">
-                        <label for="department">Department</label>
-                        <select name="department" id="departments" class="form-control">
-                            <option selected disabled>---Select department -----</option>
-                            {% for department in departments %}
-                            <option value="{{department.health_facility_id}}">{{department.name}} for
-                                {{department.health_facility.name}}</option>
-                            {% endfor %}  
-                        </select>
-                    </div> 
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    <label for="department">Department</label>
+                    {% if user.is_superuser %}
+                    <select name="department" id="departments" class="form-control">
+                        <option selected disabled>---Select department -----</option>
+                        
+                        {% for department in departments %}
+                        <option value="{{department.id}}">{{department.name}} for
+                            {{department.health_facility.name}}</option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <select name="department" id="departments" class="form-control">
+                        {% for department in facility_depts %}
+                        <option value="{{department.id}}">{{department.name}} for
+                            {{department.health_facility.name}}</option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
                 </div>
             </div>
-            <button type="submit" class="btn bg-dark text-white mt-4">Update</button>
-            <a href="{% url 'equipment_list' %}" class="btn btn-info mt-4">Back</a>
+        </div>
+        <button type="submit" class="btn bg-dark text-white mt-4">Update</button>
+        <a href="{% url 'equipment_list' %}" class="btn btn-info mt-4">Back</a>
     </form>
 </div>
 {% endblock content %}

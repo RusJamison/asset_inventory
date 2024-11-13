@@ -45,6 +45,7 @@ class EquipmentCreationForm(forms.ModelForm):
             "warranty_end_date",
             "category",
             "service_provider",
+            "purchase_order_number"
         ]
 
 

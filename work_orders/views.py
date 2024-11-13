@@ -9,7 +9,12 @@ from django.contrib.auth.decorators import login_required
 
 @login_required()
 def scheduled_work_orders(request):
-    work_orders = ScheduledWorkOrder.objects.all()
+    if request.user.is_superuser:
+        work_orders = ScheduledWorkOrder.objects.all()
+    else:
+
+        health_facility = request.user.health_facility
+        work_orders = ScheduledWorkOrder.objects.filter(equipment__location__health_facility=health_facility).all()
     context = {"title": "Scheduled Work Orders","work_orders":work_orders}
     return render(request, "work_orders/scheduled_work_orders.html", context=context)
 
@@ -40,7 +45,12 @@ def create_scheduled_work_order(request, asset_tag):
 
 @login_required()
 def unscheduled_work_orders(request):
-    work_orders = UnscheduledWorkOrder.objects.all()
+    if request.user.is_superuser:
+        work_orders = UnscheduledWorkOrder.objects.all()
+    else:
+        health_facility = request.user.health_facility
+        work_orders = UnscheduledWorkOrder.objects.filter(equipment__location__health_facility=health_facility).all()
+    
     context = {"title": "Unscheduled Work Orders","work_orders":work_orders}
     return render(request, "work_orders/unscheduled_work_orders.html", context=context)
 

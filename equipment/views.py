@@ -234,7 +234,7 @@ def update_equipment(request, asset_tag):
 
     if request.method == "POST":
         department_id = request.POST.get("department")
-        facility_id = request.POST.get("facility")
+        facility_id = request.POST.get("facilities")
 
         department = Department.objects.get(id=department_id)
 

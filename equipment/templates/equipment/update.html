@@ -61,9 +61,19 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="facility">Facility</label>
-                    <select name="facility"  class="form-control"> 
-                        <option value="{{facility.id}}">{{facility.name}}</option>
+ 
+                    {% if user.is_superuser %}
+                    <select name="facilities" class="form-control">
+                        <option selected disabled>---Select facility -----</option>
+                        {% for f in facilities %}
+                        <option value="{{f.id}}">{{f.name}}</option>
+                        {% endfor %}
                     </select>
+                    {% else %}
+                    <select name="facilities" class="form-control">
+                        <option value="{{facility.id}}" selected disabled>{{facility.name}}</option>
+                    </select>
+                    {% endif %}
                 </div>
                 <div class="col-md-4">
                     <label for="department">Department</label>

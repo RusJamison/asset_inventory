@@ -66,7 +66,10 @@ def generate_equipment_pdf(request):
 
     # Query all Equipment objects
     user = request.user
-    equipments = Equipment.objects.filter(location__health_facility=user.health_facility).all().order_by('-created_at')
+    if user.is_superuser:
+        equipments = Equipment.objects.all()
+    else:
+        equipments = Equipment.objects.filter(location__health_facility=user.health_facility).all().order_by('-created_at')
 
     # Define table data with headers
     table_data = [
@@ -221,7 +224,11 @@ def equipment_details(request, asset_tag):
 def update_equipment(request, asset_tag):
     equipment = Equipment.objects.get(asset_tag=asset_tag)
     facility = request.user.health_facility
-    departments = Department.objects.filter(health_facility= facility).all()
+    facility = request.user.health_facility
+    facilities = HealthFacility.objects.all()
+
+    departments_in_facility = Department.objects.filter(health_facility=facility).all()
+    all_departments = Department.objects.all()
 
     form = EquipmentUpdateForm(instance=equipment)
 
@@ -245,10 +252,12 @@ def update_equipment(request, asset_tag):
             return redirect(reverse("equipment_list"))
 
     context = {
-                    "title": "Create Equipment",
-                    "form": form,
-                    "departments": departments,
-                    "facility": facility,
+        "title": f"Update Equipment {equipment.name}",
+        "form": form,
+        "departments": all_departments,
+        "facility_deps": departments_in_facility,
+        "facility": facility,
+        "facilities": facilities,
                 }
     return render(request, "equipment/update.html", context=context)
 

@@ -7,13 +7,14 @@ from work_orders.models import UnscheduledWorkOrder
 class UnscheduledWorkOrdersViewTest(TestCase):
     def setUp(self):
         # Create a test user and log them in
-        self.user = get_user_model().objects.create_user(username="testuser", password="testpass")
+        health_facility = HealthFacility.objects.create(name="City Hospital")
+        self.user = get_user_model().objects.create_user(username="testuser", email='test@test.ie', health_facility=health_facility, password="testpass")
         self.client.login(username="testuser", password="testpass")
 
         # Create necessary related instances for Equipment
         manufacturer = Manufacturer.objects.create(name="Medical Supplies Inc.")
         category = Category.objects.create(name="Medical Devices")
-        health_facility = HealthFacility.objects.create(name="City Hospital")
+        
         department = Department.objects.create(name="Radiology", health_facility=health_facility)
         service_provider = ServiceProvider.objects.create(name="TechCare Solutions")
 
@@ -62,6 +63,7 @@ class UnscheduledWorkOrdersViewTest(TestCase):
 
     def test_unscheduled_work_orders_view(self):
         url = reverse("unscheduled_work_orders")  # Replace with your actual URL name for the view
+        self.client.login(username="testuser", password="testpass")
         response = self.client.get(url)
 
         # Check if the response is 200 OK

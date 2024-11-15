@@ -19,7 +19,10 @@ from django.urls import path, include
 from django.shortcuts import render
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.conf.urls import (
+    handler400, handler403, handler404, handler500
+)
+from . import views
 def homepage(request):
     return render(request, 'home.html')
 
@@ -33,3 +36,7 @@ urlpatterns = [
     path("users/", include("users.urls")),
    # path('auth/', include('auth.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+handler400 = views.custom_400
+handler403 = views.custom_403 
+handler404 = views.custom_404
+handler500 = views.custom_500 

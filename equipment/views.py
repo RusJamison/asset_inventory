@@ -89,16 +89,17 @@ def generate_equipment_pdf(request):
         ])
 
     # Create the table
-    table = Table(table_data, repeatRows=1)
+    #c_width = [0.5*inch, 1.5*inch, 1.5*inch, 0.5*inch,0.5*inch, 0.5*inch, 1.5*inch]
+    table = Table(table_data, repeatRows=1,) #rowHeights=20, colwidths=c_width)
 
     # Style the table
     table_style = TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#d3d3d3")),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.green),
         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.green),
     ])
     table.setStyle(table_style)
 

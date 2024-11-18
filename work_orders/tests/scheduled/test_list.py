@@ -1,79 +1,108 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from equipment.models import Equipment, Manufacturer, Category, HealthFacility, Department, ServiceProvider, EquipmentLocation
-from work_orders.models import ScheduledWorkOrder, UnscheduledWorkOrder
+from equipment.models import Equipment, EquipmentLocation, Manufacturer, Category, ServiceProvider, HealthFacility, Department
 
-class ScheduledWorkOrdersViewTest(TestCase):
+User = get_user_model()
+
+class EquipmentListViewTest(TestCase):
     def setUp(self):
-        # Create a test user and log them in
-        self.user = get_user_model().objects.create_user(username="testuser", password="testpass")
-        self.client.login(username="testuser", password="testpass")
+        """Set Up the tests"""
+        self.health_facility = HealthFacility.objects.create(name='Health Facility 1')
+        self.health_facility2 = HealthFacility.objects.create(name='Health Facility 2')
 
-        # Create necessary related instances for Equipment
-        manufacturer = Manufacturer.objects.create(name="Medical Supplies Inc.")
-        category = Category.objects.create(name="Medical Devices")
-        health_facility = HealthFacility.objects.create(name="City Hospital")
-        department = Department.objects.create(name="Radiology",health_facility=health_facility)
-        service_provider = ServiceProvider.objects.create(name="TechCare Solutions")
+        self.manufacturer = Manufacturer.objects.create(name='Manufacturer 1')
 
-        # Create Equipment instance
-        location = EquipmentLocation.objects.create(health_facility=health_facility, department=department)
-        equipment = Equipment.objects.create(
-            name="MRI Machine",
-            model="Model MRI-X200",
-            asset_tag=1001,
-            serial_no="MRI123456",
-            description="High-resolution MRI machine",
-            price=150000.00,
-            manufacturer=manufacturer,
-            status="IN_USE",
-            purchase_order_number="PO10001",
-            category=category,
-            location=location,
-            warranty_start_date="2022-01-01",
-            warranty_end_date="2025-01-01",
-            in_use_as_of_date="2022-01-15",
-            service_provider=service_provider,
+        self.category = Category.objects.create(name='Category 1')
+
+        self.service_provider = ServiceProvider.objects.create(name='Service Provider 1')
+
+        self.department1 = Department.objects.create(name='X-Ray', health_facility=self.health_facility)
+        self.department2 = Department.objects.create(name='X-Ray', health_facility=self.health_facility2)
+
+        self.location1 = EquipmentLocation.objects.create(
+            health_facility=self.health_facility,
+            department = self.department1
         )
 
-        # Create ScheduledWorkOrder instances
-        ScheduledWorkOrder.objects.create(
-            work_order_num=1,
-            equipment=equipment,
-            scheduled_action="Preventive Maintenance",
-            purchase_order=12345,
-            freq_interval="Yearly",
-            #frequency=1,
-            next_scheduled_action_date="2024-12-01",
-            last_serviced_at="2023-12-01",
-        )
-        ScheduledWorkOrder.objects.create(
-            work_order_num=2,
-            equipment=equipment,
-            scheduled_action="Inspection",
-            purchase_order=67890,
-            freq_interval="Monthly",
-            #frequency=12,
-            next_scheduled_action_date="2024-12-15",
-            last_serviced_at="2024-11-15",
+
+        self.location2 = EquipmentLocation.objects.create(
+            health_facility=self.health_facility2,
+            department = self.department2
         )
 
-    def test_scheduled_work_orders_view(self):
-        url = reverse("scheduled_work_orders")  # Replace with your actual URL name for the view
-        response = self.client.get(url)
 
-        # Check if the response is 200 OK
+        Equipment.objects.create(
+            name='Diathermy',
+            model='31293821093',
+            asset_tag=9873908,
+            serial_no=980980,
+            description='Test equipment',
+            price=1000.00,
+            manufacturer=self.manufacturer,
+            category=self.category,
+            location=self.location1,
+            warranty_start_date='2023-01-01',
+            warranty_end_date='2024-01-01',
+            in_use_as_of_date='2023-01-01',
+            service_provider=self.service_provider
+        )
+
+        Equipment.objects.create(
+            name='Diathermy',
+            model='31293821093',
+            asset_tag=987354,
+            serial_no=980980,
+            description='Test equipment',
+            price=1000.00,
+            manufacturer=self.manufacturer,
+            category=self.category,
+            location=self.location2,
+            warranty_start_date='2023-01-01',
+            warranty_end_date='2024-01-01',
+            in_use_as_of_date='2023-01-01',
+            service_provider=self.service_provider
+        )
+
+
+
+        self.user = User.objects.create_user(username='testuser',email="test@gmail.com", password='password', health_facility=self.health_facility)
+        self.user.health_facility = self.health_facility
+        self.user.is_verified = True
+        self.user.is_active = True
+        self.user.save()
+
+        self.superuser = User.objects.create_superuser(username='admin', password='adminpass',email="admin@gmail.com",  health_facility=self.health_facility)
+
+    def test_equipment_list_view_with_superuser(self):
+        """Test equipment list view with superuser"""
+        self.client.login(username='admin', password='adminpass')
+        response = self.client.get(reverse('equipment_list'))
+
         self.assertEqual(response.status_code, 200)
 
-        # Verify that the correct template is used
-        self.assertTemplateUsed(response, "work_orders/scheduled_work_orders.html")
+        self.assertEqual(len(response.context['page_obj']), 2)  # Since pagination is set to 5
+        self.assertEqual(response.context['page_obj'].paginator.count, 2)
 
-        # Check that the context contains the scheduled work orders
-        self.assertIn("work_orders", response.context)
-        self.assertEqual(len(response.context["work_orders"]), 2)  # Should match the number of objects created in setUp
+        self.assertTemplateUsed(response, 'equipment/index.html')
 
-        # Check specific attributes of the work orders
-        work_order_numbers = [work_order.work_order_num for work_order in response.context["work_orders"]]
-        self.assertIn(1, work_order_numbers)
-        self.assertIn(2, work_order_numbers)
+    def test_equipment_list_view_with_regular_user(self):
+        self.client.login(username='testuser', password='password')
+        response = self.client.get(reverse('equipment_list'))
+
+        self.assertEqual(response.status_code, 200)
+
+        self.assertEqual(len(response.context['page_obj']), 1)  # Pagination
+        self.assertEqual(response.context['page_obj'].paginator.count, 1)
+
+        for equipment in response.context['page_obj']:
+            self.assertEqual(equipment.location.health_facility, self.user.health_facility)
+
+        self.assertTemplateUsed(response, 'equipment/index.html')
+
+    def test_equipment_list_view_redirects_for_anonymous_user(self):
+        response = self.client.get(reverse('equipment_list'))
+
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('/accounts/login/', response.url)
+

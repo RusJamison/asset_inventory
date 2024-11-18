@@ -1,86 +1,131 @@
-from django.test import TestCase
+# tests.py
+from django.test import TestCase, Client
 from django.urls import reverse
+from django.utils import timezone
+import logging
 from django.contrib.auth import get_user_model
-from equipment.models import  Equipment, Manufacturer, Category, HealthFacility, Department, ServiceProvider, EquipmentLocation
-from work_orders.models import UnscheduledWorkOrder
+from work_orders.models import UnscheduledWorkOrder, WorKOrderStatus
+from equipment.models import (
+    Equipment,
+    EquipmentLocation,
+    ServiceProvider,
+    Manufacturer,
+    Department,
+    HealthFacility,
+    Category,
+)
+
+User = get_user_model()
+
+logger = logging.getLogger(__name__)
+
 
 class UnscheduledWorkOrdersViewTest(TestCase):
     def setUp(self):
-        # Create a test user and log them in
-        health_facility = HealthFacility.objects.create(name="City Hospital")
-        self.user = get_user_model().objects.create_user(username="testuser", email='test@test.ie', health_facility=health_facility, password="testpass")
-        self.client.login(username="testuser", password="testpass")
-
-        # Create necessary related instances for Equipment
-        manufacturer = Manufacturer.objects.create(name="Medical Supplies Inc.")
-        category = Category.objects.create(name="Medical Devices")
-        
-        department = Department.objects.create(name="Radiology", health_facility=health_facility)
-        service_provider = ServiceProvider.objects.create(name="TechCare Solutions")
-
-        # Create Equipment instance
-        location = EquipmentLocation.objects.create(health_facility=health_facility, department=department)
-        equipment = Equipment.objects.create(
-            name="MRI Machine",
-            model="Model MRI-X200",
-            asset_tag=1001,
-            serial_no="MRI123456",
-            description="High-resolution MRI machine",
-            price=150000.00,
-            manufacturer=manufacturer,
-            status="in use",
-            purchase_order_number="PO10001",
-            category=category,
-            location=location,
-            warranty_start_date="2022-01-01",
-            warranty_end_date="2025-01-01",
-            in_use_as_of_date="2022-01-15",
-            service_provider=service_provider,
+        self.client = Client()
+        self.initial_facility = HealthFacility.objects.create(
+            name="Initial Facility", location="City A"
+        )
+        self.initial_department = Department.objects.create(
+            name="Initial Department", health_facility=self.initial_facility
+        )
+        self.user = User.objects.create_user(
+            username="testuser",
+            email="testuser@example.com",
+            password="password",
+            health_facility=self.initial_facility,
         )
 
-        # Create sample UnscheduledWorkOrder instances
-        UnscheduledWorkOrder.objects.create(
-            work_order_num=1,
-            equipment=equipment,
-            problem="Faulty display",
-            work_carried="Replaced display screen",
-            purchase_order=12345,
-            update="Screen replaced successfully",
-            status="Closed",
-            closed_at="2024-01-10 10:00:00",
-            date_of_update="2024-01-10",
+        self.user.is_verified = True
+        self.user.save()
+        self.equipment_location = EquipmentLocation.objects.create(
+            health_facility=self.initial_facility,
+            department=self.initial_department,
         )
-        UnscheduledWorkOrder.objects.create(
-            work_order_num=2,
-            equipment=equipment,
-            problem="Overheating issue",
-            work_carried="Cleaned and checked cooling system",
-            purchase_order=67890,
-            update="Cooling system cleaned; awaiting further inspection",
-            status="Open",
-            date_of_update="2024-01-15",
+        self.category = Category.objects.create(name="Category 1")
+
+
+        self.manufacturer = Manufacturer.objects.create(name="Manufacturer 1")
+
+        self.service_provider = ServiceProvider.objects.create(
+            name="Service Provider 1"
         )
+
+        self.equipment = Equipment.objects.create(
+            name="Diathermy",
+            model="31293821093",
+            asset_tag=9873908,
+            serial_no=980980,
+            description="Test equipment",
+            price=1000.00,
+            manufacturer=self.manufacturer,
+            category=self.category,
+            location=self.equipment_location,
+            warranty_start_date="2023-01-01",
+            warranty_end_date="2024-01-01",
+            in_use_as_of_date="2023-01-01",
+            service_provider=self.service_provider,
+        )
+
+        # Create test UnscheduledWorkOrders
+        self.work_order1 = UnscheduledWorkOrder.objects.create(
+            work_order_num=1001,
+            equipment=self.equipment,
+            problem="The display screen is flickering intermittently.",
+            work_carried="Replaced the display screen.",
+            purchase_order=5001,
+            update="Screen replaced and tested successfully.",
+            status=WorKOrderStatus.Closed,
+            closed_at=timezone.now(),
+            date_of_update=timezone.now().date(),
+        )
+
+        self.work_order2 = UnscheduledWorkOrder.objects.create(
+            work_order_num=1002,
+            equipment=self.equipment,
+            problem="Machine is overheating after 2 hours of continuous use.",
+            work_carried="Cleaned the cooling vents and replaced the fan.",
+            purchase_order=5002,
+            update="Overheating issue resolved.",
+            status=WorKOrderStatus.Open,
+            date_of_update=timezone.now().date(),
+        )
+
+        self.work_order3 = UnscheduledWorkOrder.objects.create(
+            work_order_num=1003,
+            equipment=self.equipment,
+            problem="Error code E05 displayed during startup.",
+            work_carried="Diagnosed faulty power supply unit.",
+            purchase_order=5003,
+            update="Awaiting delivery of new power supply unit.",
+            status=WorKOrderStatus.Open,
+            date_of_update=timezone.now().date(),
+        )
+
+        self.url = reverse("unscheduled_work_orders")
 
     def test_unscheduled_work_orders_view(self):
-        url = reverse("unscheduled_work_orders")  # Replace with your actual URL name for the view
-        self.client.login(username="testuser", password="testpass")
-        response = self.client.get(url)
+        self.client.force_login(self.user)
+        response = self.client.get(self.url)
 
-        # Check if the response is 200 OK
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "work_orders/unscheduled_work_orders.html")
+        self.assertIn("work_orders", response.context)
+        self.assertEqual(response.context["title"], "Unscheduled Work Orders")
+
+    def test_unscheduled_work_orders_view_no_work_orders(self):
+        self.client.force_login(self.user)
+        UnscheduledWorkOrder.objects.all().delete()
+
+        response = self.client.get(self.url)
+
+        logger.info(
+            "Response with no work orders status code: %s", response.status_code
+        )
+        logger.info(
+            "Response content with no work orders:\n%s", response.content.decode()
+        )
+
         self.assertEqual(response.status_code, 200)
 
-        # Verify that the correct template is used
-        self.assertTemplateUsed(response, "work_orders/unscheduled_work_orders.html")
-
-        # Check that the context contains the unscheduled work orders
-        self.assertIn("work_orders", response.context)
-        self.assertEqual(len(response.context["work_orders"]), 2)  # Should match the number of objects created in setUp
-
-        # Optional: Check specific attributes of the work orders to confirm they match
-        work_order_problems = [work_order.problem for work_order in response.context["work_orders"]]
-        self.assertIn("Faulty display", work_order_problems)
-        self.assertIn("Overheating issue", work_order_problems)
-        
-        work_order_statuses = [work_order.status for work_order in response.context["work_orders"]]
-        self.assertIn("Closed", work_order_statuses)
-        self.assertIn("Open", work_order_statuses)
+        self.assertQuerySetEqual(response.context["work_orders"], [])

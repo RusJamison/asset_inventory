@@ -18,11 +18,21 @@ from django.contrib.auth import get_user_model
 class UnscheduledWorkOrderViewTests(TestCase):
     def setUp(self):
         # Create a test user and log them in
-        self.user = get_user_model().objects.create_user(username="testuser", password="testpass")
+        
         self.client.login(username="testuser", password="testpass")
         manufacturer = Manufacturer.objects.create(name="Medical Supplies Inc.")
         category = Category.objects.create(name="Medical Devices")
         health_facility = HealthFacility.objects.create(name="City Hospital")
+        User = get_user_model()
+        self.user = User.objects.create_user(
+            username="testuser",
+            email="testuser@example.com",
+            password="testpass",
+            health_facility=health_facility
+        )
+
+        self.user.is_verified = True
+        self.user.save()
         department = Department.objects.create(
             name="Radiology", health_facility=health_facility
         )
@@ -48,7 +58,17 @@ class UnscheduledWorkOrderViewTests(TestCase):
             in_use_as_of_date="2022-01-15",
             service_provider=service_provider,
         )
-
+        
+        work_order = UnscheduledWorkOrder.objects.create(
+        work_order_num = 3558965,
+        equipment =self.equipment,
+        problem = 'Patient Circuit Leak',
+        work_carried = 'Replaced Patient Circuit',
+        purchase_order = 235468,
+        update = 'uyit',
+        status = 'Open',
+        date_of_update = '2024-03-27',
+        )
         self.unscheduled_work_orders_url = reverse("unscheduled_work_orders")
         self.create_work_order_url = reverse(
             "create_unscheduled_work_order", args=[self.equipment.asset_tag]
@@ -72,7 +92,17 @@ class UnscheduledWorkOrderViewTests(TestCase):
         self.assertEqual(work_order.problem, "Test problem description")
 
     def test_create_unscheduled_work_order_view_post_invalid(self):
-        form_data = {}
+        self.client.force_login(self.user)
+        form_data = {
+             "problem": "Test problem description",
+            "work_carried": "Test work carried",
+            "work_order_num": 123456,
+            "purchase_order": 123456,
+            "update": "2022-10-12",
+            "status": "Open",
+            "closed_at": "2022-10-11",
+            "date_of_update": "2024-12-12",
+        }
         response = self.client.post(self.create_work_order_url, data=form_data)
 
         self.assertEqual(response.status_code, 200)

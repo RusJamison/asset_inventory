@@ -68,3 +68,4 @@ class UnscheduledWorkOrder(models.Model):
     def __str__(self):
         return f"Work Order for equipment {self.equipment.asset_tag} NO {self.work_order_num}"
 
+

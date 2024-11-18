@@ -67,6 +67,7 @@
                   <a class="nav-link text-white fw-bold {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
                 </li>
                 {% endif %}
+              </ul>
             </div>
             <form class="d-flex" action="{% url 'search_equipment' %}">
               <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">

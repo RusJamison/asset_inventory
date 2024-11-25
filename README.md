@@ -75,3 +75,74 @@ The Sign-Up process requires
 ## Features
 
 ### Existing Features
+
+-  **F01 Navigation Bar**
+
+      This platform required strict control over which users could access and add equipment, update equipment repairs, maintenance and event logs in the system. The user must register or sign in before access is granted to the site.   If the user signed in is the admin user then an additional link of Admin is also shown on the navigation bar.  This link takes the user to the Django Admin screens where data in the underlying database can be added, retrieved, modified and deleted. The navigation bar is responsive on multiple screen sizes - on smaller screens it coverts to a 'burger' menu style. 
+
+      Register/Login Navbar
+
+      ![Navbar Full](documentation/images/register-navbar.png)
+
+      Navbar Full Signed in as User
+
+      ![Navbar Full Signed in](documentation/images/signed-in-user-navbar.png)
+
+      Navbar Full Signed in as Admin
+
+      ![Navbar Full Signed in as Admin](documentation/images/signed-in-admin-navbar.png)
+
+      Navbar Burger Menu
+
+      ![Navbar Burger](documentation/images/signed-in-burger-menu-navbar.png)
+
+
+-  **F02 Landing page image**
+
+      The landing page shows the register or login Navbar and at the bottom of the page there is a sigh up or sign in button. The text inbetween describe the importance and advantages of using Asset Inventory Management System database in facilities and Hospitals.
+
+      ![Landing Area](documentation/images/landing-page.png)
+
+-  **F03 Home page image**
+
+      Once the user is signed in the user lands on a home page. The user is now able to view the equipment using view equipment button at the bottom of the page or using equipment button on the Navbar
+
+      ![Home Area](documentation/images/home-page.png)
+
+-  **F04 Equipment List image**
+
+      After clicking **view equipment or equipment button** the user is directed to the equipment list captured already or to a blank equipment list if it is the first time visit to a new facility or hospital asset inventory management system database.
+
+      ![Equipment List](documentation/images/equipment-list.png)
+
+-  **F05 Add Equipment**
+
+      From the Equipment List page the user can use add equipment button to add a new equipment to the current equipment list. The user adds the new equipment detail to a form and save it. The user can also save and open another form to add the next equipment. If there are more than one equipment of same model the user will use duplicate which pre-populate details of the last equipment except the serial number, asset tag purchase order number and facility.
+
+      ![Add Equipment Form](documentation/images/add-equipment-form.png)
+
+-  **F06 Update Equipment Details**
+
+      The User can update equipment details on the update for as an example user can change department as long it is assigned in the Django Admin. Some of the fields are pre-populated.
+
+      ![Update Equipment Details Form](documentation/images/update-equipment-details.png)
+
+-  **F07 Scheduled Work Order**
+
+      The Scheduled Work Order form allows the User to setup in advance when the equipment is due for service or calibration or validation. The User click on the Add PM button to add a scheduled action which is preventative maintenance,calibration, validation or inspection. The Add PM is on each equipment so when Add PM is clicked a pre-populate form for that equipment comes up and the User can add the type of Scheduled work order to be carried including the dates the service was last serviced and the next service.
+
+      ![Add Scheduled Work Order Form](documentation/images/add-pm-form.png)
+
+      
+
+
+
+
+
+
+
+
+
+
+    
+     

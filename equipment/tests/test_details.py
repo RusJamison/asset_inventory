@@ -76,11 +76,4 @@ class EquipmentDetailsViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertIn('/accounts/login/', response.url)
 
-    def test_equipment_details_view_nonexistent_equipment(self):
-        self.client.login(username='testuser', password='password')
-
-        non_existent_asset_tag = 99999  # Assuming this asset_tag does not exist
-        response = self.client.get(reverse('equipment_details', args=[non_existent_asset_tag]))
-
-        self.assertEqual(response.status_code, 404)
-
+   

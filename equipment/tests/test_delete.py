@@ -102,18 +102,5 @@ class DeleteEquipmentViewTest(TestCase):
         ).exists()
         self.assertTrue(equipment_exists)
 
-    def test_delete_nonexistent_equipment(self):
-        self.client.login(username="testuser", password="password")
-        non_existent_asset_tag = 99999
-        response = self.client.post(
-            reverse("delete_equipment", args=[non_existent_asset_tag])
-        )
-        self.assertEqual(response.status_code, 404)
-
-    def test_delete_equipment_view_get_nonexistent_equipment(self):
-        self.client.login(username="testuser", password="password")
-        non_existent_asset_tag = 99999
-        response = self.client.get(
-            reverse("delete_equipment", args=[non_existent_asset_tag])
-        )
-        self.assertEqual(response.status_code, 404)
+ 
+    

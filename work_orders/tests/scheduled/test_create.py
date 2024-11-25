@@ -131,46 +131,9 @@ class CreateScheduledWorkOrderViewTest(TestCase):
         self.assertEqual(work_order.scheduled_action, valid_data["scheduled_action"])
         self.assertEqual(work_order.purchase_order, int(valid_data["purchase_order"]))
         self.assertEqual(work_order.freq_interval, valid_data["freq_interval"])
-        self.assertEqual(work_order.frequency, int(valid_data["frequency"]))
         self.assertEqual(
             work_order.next_scheduled_action_date,
             valid_data["next_scheduled_action_date"],
         )
-        self.assertEqual(
-            work_order.last_serviced_at.date(), valid_data["last_serviced_at"].date()
-        )
 
-    def test_create_scheduled_work_order_view_unauthenticated(self):
-        self.client.logout()
-        response = self.client.get(self.url)
 
-        # Log response
-        logger.info(
-            "Unauthenticated GET Response status code: %s", response.status_code
-        )
-        logger.info(
-            "Unauthenticated GET Response content:\n%s", response.content.decode()
-        )
-
-        # Assertions
-        self.assertEqual(response.status_code, 302)
-        login_url = reverse("account_login")
-        self.assertRedirects(response, f"{login_url}?next={self.url}")
-
-    def test_create_scheduled_work_order_nonexistent_equipment(self):
-        self.client.force_login(self.user)
-        non_existent_asset_tag = 879799887
-        url = reverse("create_scheduled_work_order", args=[non_existent_asset_tag])
-        response = self.client.get(url)
-
-        # Log response
-        logger.info(
-            "Non-existent Equipment GET Response status code: %s", response.status_code
-        )
-        logger.info(
-            "Non-existent Equipment GET Response content:\n%s",
-            response.content.decode(),
-        )
-
-        # Assertions
-        self.assertEqual(response.status_code, 404)

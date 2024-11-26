@@ -42,7 +42,7 @@ The Sign-Up process requires
 * US02: Navigate site
   - As a **Site User** I can **easily register** so that **I can easily access application functionality**
 * US03: View equipment list
-  - As a **Site User** I can **view a list of my facility equipment** so that **I can select one to access more details by clicking the highlited name**
+  - As a **Site User** I can **view a list of my facility equipment** so that **I can select an equipment to access more details by clicking the highlighted name of the equipment on the equipment list**
 * US04: View equipment information
   - As a **Site User** I can **click on equipment or scheduled or unscheduled work order** so that **I can view  full details of equipment**
 * US05: Add new equipment
@@ -60,7 +60,7 @@ The Sign-Up process requires
 * US11: Create unscheduled work order
   - As a **Site User** I can **create repair orders to the equipment** so that **I take control is the repairing of equipment**
 * US12: Equipment status
-  - As a **Site User** I can ** assign equipment as in use, under repair or decommissioned** so that **I can report to facility management the status of the equipment**
+  - As a **Site User** I can **assign equipment as in use, under repair or decommissioned** so that **I can report to facility management the status of the equipment**
 * US13: Account registration and login
   - As a **Site User** I can **register an account** so that **I can log in and then add equipment, view equipment, update equipment, delete equipment, search equipment and export equipment as pdf**
 * US14: Manage 

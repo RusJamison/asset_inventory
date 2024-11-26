@@ -20,7 +20,7 @@ class UnScheduleWorkOrderForm(forms.ModelForm):
     )
     date_of_update = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}),required=False)
     closed_at = forms.DateField(widget=forms.DateInput(attrs={'type': 'date','required':False}), required=False)
-    work_order_report = forms.FileField(widget=forms.FileInput(attrs={'type': 'date','required':False}), required=False)
+    work_order_report = forms.FileField(widget=forms.FileInput(), required=False)
     class Meta:
         model = UnscheduledWorkOrder
         fields = []

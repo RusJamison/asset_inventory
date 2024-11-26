@@ -129,9 +129,72 @@ The Sign-Up process requires
 
 -  **F07 Scheduled Work Order**
 
-      The Scheduled Work Order form allows the User to setup in advance when the equipment is due for service or calibration or validation. The User click on the Add PM button to add a scheduled action which is preventative maintenance,calibration, validation or inspection. The Add PM is on each equipment so when Add PM is clicked a pre-populate form for that equipment comes up and the User can add the type of Scheduled work order to be carried including the dates the service was last serviced and the next service.
+      The Scheduled Work Order form allows the User to setup in advance when the equipment is due for service or calibration or validation. The User click on the **Add PM** button to add a scheduled action which is preventative maintenance,calibration, validation or inspection. The **Add PM** is on each equipment so when **Add PM** is clicked a pre-populate form for that equipment comes up and the User can add the type of Scheduled work order to be carried including the dates the service was last serviced and the next service.
 
       ![Add Scheduled Work Order Form](documentation/images/add-pm-form.png)
+
+-  **F08 Unscheduled Work Order**
+
+      The Unscheduled Work Order is an unplanned repair. Equipment breakdown can other anytime despite carrying Scheduled services to minimise breakdowns. The User can add repairs to each equipment by clicking the **Add Repair** button.
+
+      ![Add Unscheduled Work Order Form](documentation/images/add-repair-form.png)
+
+-  **F09 Scheduled Work Order View**
+
+      The User can view all Scheduled WorK Orders under their Facility or Hospital. The Admin can view all Equipment from all facilities.
+
+      ![Add Scheduled Work Order View](documentation/images/scheduled-work-order-view.png)
+
+-  **F10 Unscheduled Work Order View**
+
+      The User can view all Unscheduled WorK Orders under their Facility or Hospital. The Admin can view all Equipment from all facilities.
+
+      ![Add Unscheduled Work Order View](documentation/images/unscheduled-work-order-view.png)
+
+-  **F11 Equipment Details View**
+
+      The User can view each equipment details by clicking Equipment in the Navbar and then click on the name of that equipment highlighted in blue.
+
+      Equipment Details Link using Equipment name
+
+      ![Equipment Details Link](documentation/images/equipment-details-link.png)
+
+      Equipment Details After clicking Equipment name. You can view equipment general informatin, location,scheduled and unshceduled work orders.
+
+      ![Equipment Details](documentation/images/equipment-details.png)
+
+-  **F12 Equipment Search**
+
+      The User can enter an equipment id for example equipment tag. User enter one of their equipment tag 7000105. The search returns results.
+
+      ![Equipment Search](documentation/images/search-results.png)
+
+      The User clicks on the results and the equipment details is shown on the window.
+
+      ![Equipment Search Results for Equipment Tag](documentation/images/search-result-7000105.png)
+
+-  **F13 Equipment Export**
+
+      The User can export Equipment List into a pdf file for sharing with other team members. Each facility can only share their equipment. The Admin can view all equipment from all facilities.
+
+      ![Equipment Export](documentation/images/equipment-export.png)
+
+-  **F14 Django Admin**
+
+      The Admin can add equipment, create equipment catagories, departments, health facilities, equipment location,equipment manufacturers, service providers,add users and give users permissions.
+
+      ![Django Admin](documentation/images/django-admin.png)
+
+-  **F15 Relationship Diagrams For DBMS**
+
+      The Relationship diagram for the DBMS consists of the following tables: Manufacturer, Category, Health Facility, Service Provider, Department, Equipment Location, Equipment and CustomUser
+
+      ![Django Admin](documentation/images/db.png)
+
+
+ 
+
+
 
       
 

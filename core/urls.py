@@ -23,25 +23,27 @@ from django.conf.urls import (
     handler400, handler403, handler404, handler500
 )
 from . import views
+
+
 def homepage(request):
     return render(request, 'home.html')
 
+
 def error_view(request):
     raise Exception("This is a test error")
-    
+
 
 urlpatterns = [
     path('', homepage, name='homepage'),
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
-    path('equipment/',include('equipment.urls'), name='equipment'),
+    path('equipment/', include('equipment.urls'), name='equipment'),
     path('work_orders/', include('work_orders.urls')),
     path("accounts/", include("allauth.urls")),
     path("users/", include("users.urls")),
     path("error/", error_view)
-   # path('auth/', include('auth.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 handler400 = views.custom_400
-handler403 = views.custom_403 
+handler403 = views.custom_403
 handler404 = views.custom_404
-handler500 = views.custom_500 
+handler500 = views.custom_500

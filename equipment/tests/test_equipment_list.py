@@ -13,15 +13,16 @@ from equipment.models import (
 from work_orders.models import ScheduledWorkOrder, UnscheduledWorkOrder
 from datetime import date
 
+
 class EquipmentListViewTest(TestCase):
     def setUp(self):
 
         self.client = Client()
-        
 
-        self.health_facility_1 = HealthFacility.objects.create(name="City Hospital")
-        self.health_facility_2 = HealthFacility.objects.create(name="County Clinic")
-        
+        self.health_facility_1 = HealthFacility.objects.create(
+            name="City Hospital")
+        self.health_facility_2 = HealthFacility.objects.create(
+            name="County Clinic")
 
         User = get_user_model()
         self.user = User.objects.create_user(
@@ -39,15 +40,17 @@ class EquipmentListViewTest(TestCase):
             password="adminpass",
             health_facility=self.health_facility_1
         )
-        
 
-        self.client.login(username ="testuser", password="testpass")
-        
-        self.manufacturer = Manufacturer.objects.create(name="Medical Supplies Inc.")
+        self.client.login(username="testuser", password="testpass")
+        self.manufacturer = Manufacturer.objects.create(
+            name="Medical Supplies Inc.")
         self.category = Category.objects.create(name="Medical Devices")
-        self.department = Department.objects.create(name="Radiology", health_facility=self.health_facility_1)
-        self.service_provider = ServiceProvider.objects.create(name="TechCare Solutions")
-        
+        self.department = Department.objects.create(
+            name="Radiology",
+            health_facility=self.health_facility_1
+        )
+        self.service_provider = ServiceProvider.objects.create(
+            name="TechCare Solutions")
 
         self.location_1 = EquipmentLocation.objects.create(
             health_facility=self.health_facility_1,
@@ -69,13 +72,12 @@ class EquipmentListViewTest(TestCase):
             status="IN_USE",
             purchase_order_number="PO10002",
             category=self.category,
-            location=self.location_1,  
+            location=self.location_1,
             warranty_start_date=date(2023, 1, 1),
             warranty_end_date=date(2026, 1, 1),
             in_use_as_of_date=date(2023, 1, 15),
             service_provider=self.service_provider,
         )
-        
         self.equipment2 = Equipment.objects.create(
             name="Ultrasound Machine",
             model="US-300",
@@ -93,24 +95,26 @@ class EquipmentListViewTest(TestCase):
             in_use_as_of_date=date(2023, 6, 15),
             service_provider=self.service_provider,
         )
-        
+
     def test_equipment1_assigned_to_location1(self):
         self.assertEqual(self.equipment1.location, self.location_1)
-        self.assertEqual(self.equipment1.location.health_facility, self.health_facility_1)
-        
+        self.assertEqual(
+            self.equipment1.location.health_facility, self.health_facility_1)
+
     def test_equipment2_assigned_to_location2(self):
         self.assertEqual(self.equipment2.location, self.location_2)
-        self.assertEqual(self.equipment2.location.health_facility, self.health_facility_2)
-        
+        self.assertEqual(
+                         self.equipment2.location.health_facility,
+                         self.health_facility_2
+                         )
+
     def test_equipment_list_view_as_regular_user(self):
         # Log in as a regular user
-        login = self.client.login(username="testuser", password="testpass")  
-        self.assertTrue(login) 
-        
+        login = self.client.login(username="testuser", password="testpass")
+        self.assertTrue(login)
 
         url = reverse("equipment_list")
         response = self.client.get(url)
-        
 
         self.assertEqual(response.status_code, 200)
 
@@ -118,8 +122,8 @@ class EquipmentListViewTest(TestCase):
 
         equipment_list = response.context['page_obj'].object_list
         self.assertIn(self.equipment1, equipment_list)
-        self.assertNotIn(self.equipment2, equipment_list)  
-        
+        self.assertNotIn(self.equipment2, equipment_list)
+
     def test_equipment_list_view_as_superuser(self):
 
         self.client.force_login(self.superuser)
@@ -130,7 +134,7 @@ class EquipmentListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response, "equipment/index.html")
-        
+
         equipment_list = response.context['page_obj'].object_list
         self.assertIn(self.equipment1, equipment_list)
         self.assertIn(self.equipment2, equipment_list)

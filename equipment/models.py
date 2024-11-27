@@ -9,12 +9,6 @@ class StatusChoices(models.TextChoices):
     DECOMMISIONED = "decommissioned", "decommissioned"
 
 
-# class ManufacturerChoices(models.TextChoices):
-#    COMPANY_A = "Company A", "Company A"
-#    COMPANY_B = "Company B", "Company B"
-#    COMPANY_C = "Company C", "Company C"
-
-
 # Create your models here.
 class Equipment(models.Model):
     name = models.CharField(max_length=200)
@@ -23,7 +17,8 @@ class Equipment(models.Model):
     serial_no = models.CharField(max_length=200)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = CloudinaryField(resource_type="image", null=True, blank=True, default=None)
+    image = CloudinaryField(resource_type="image", null=True, blank=True,
+                            default=None)
     notes = models.TextField(null=True, blank=True, default=None)
     manufacturer = models.ForeignKey(
         "Manufacturer", on_delete=models.CASCADE, related_name="equipments"
@@ -32,7 +27,8 @@ class Equipment(models.Model):
         resource_type="raw", null=True, blank=True, default=None
     )
     status = models.CharField(
-        max_length=250, choices=StatusChoices.choices, default=StatusChoices.IN_USE
+        max_length=250, choices=StatusChoices.choices,
+        default=StatusChoices.IN_USE
     )
     created_at = models.DateTimeField(auto_now_add=True)
     purchase_order_number = models.CharField(max_length=50, blank=True)
@@ -115,7 +111,8 @@ class EquipmentLocation(models.Model):
     """Relates an equipment to a location and a department"""
 
     health_facility = models.ForeignKey(
-        HealthFacility, related_name="equipment_location", on_delete=models.CASCADE
+        HealthFacility, related_name="equipment_location",
+        on_delete=models.CASCADE
     )
     department = models.ForeignKey(
         Department, related_name="equipment_location", on_delete=models.CASCADE

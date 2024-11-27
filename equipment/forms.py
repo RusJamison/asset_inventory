@@ -7,9 +7,12 @@ class EquipmentCreationForm(forms.ModelForm):
     description = forms.CharField(
         widget=forms.Textarea(attrs={"rows": 3, "class": "form-control"})
     )
-    price = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    serial_no = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    price = forms.CharField(widget=forms.
+                            TextInput(attrs={"class": "form-control"}))
+    serial_no = forms.CharField(widget=forms.
+                                TextInput(attrs={"class": "form-control"}))
+    name = forms.CharField(widget=forms.
+                           TextInput(attrs={"class": "form-control"}))
     notes = forms.CharField(
         widget=forms.Textarea(attrs={"class": "form-control", "rows": 3}),
         required=False,

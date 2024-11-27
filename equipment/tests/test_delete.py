@@ -32,7 +32,8 @@ class DeleteEquipmentViewTest(TestCase):
         self.user.is_verified = True
         self.user.save()
 
-        self.manufacturer = Manufacturer.objects.create(name="Test Manufacturer")
+        self.manufacturer = Manufacturer.objects.create(
+            name="Test Manufacturer")
         self.category = Category.objects.create(name="Test Category")
         self.service_provider = ServiceProvider.objects.create(
             name="Test Service Provider"
@@ -101,6 +102,3 @@ class DeleteEquipmentViewTest(TestCase):
             asset_tag=self.equipment.asset_tag
         ).exists()
         self.assertTrue(equipment_exists)
-
- 
-    

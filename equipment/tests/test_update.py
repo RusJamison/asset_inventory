@@ -90,12 +90,12 @@ class UpdateEquipmentViewTest(TestCase):
             "serial_no": "SN002",
             "department": self.new_department.id,
             "facilities": self.new_facility.id,
-            "price":12000,
-            "description":"description",
-            "status":"in use",
+            "price": 12000,
+            "description": "description",
+            "status": "in use",
             "service_provider": self.service_provider.id,
-            "manufacturer":self.manufacturer.id,
-            "category":self.category.id
+            "manufacturer": self.manufacturer.id,
+            "category": self.category.id
         }
 
         response = self.client.post(self.url, data=update_data)

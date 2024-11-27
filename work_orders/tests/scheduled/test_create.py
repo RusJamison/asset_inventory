@@ -43,7 +43,8 @@ class CreateScheduledWorkOrderViewTest(TestCase):
         self.user.is_verified = True
         self.user.save()
 
-        self.manufacturer = Manufacturer.objects.create(name="Test Manufacturer")
+        self.manufacturer = Manufacturer.objects.create(
+            name="Test Manufacturer")
         self.category = Category.objects.create(name="Test Category")
         self.service_provider = ServiceProvider.objects.create(
             name="Test Service Provider"
@@ -98,8 +99,10 @@ class CreateScheduledWorkOrderViewTest(TestCase):
         self.assertIsInstance(
             response.context["work_order_form"], ScheduledWorkOrderForm
         )
-        self.assertIsInstance(response.context["equipment_form"], EquipmentCreationForm)
-        self.assertEqual(response.context["equipment_form"].instance, self.equipment)
+        self.assertIsInstance(response.context["equipment_form"],
+                              EquipmentCreationForm)
+        self.assertEqual(response.context["equipment_form"].instance,
+                         self.equipment)
 
     def test_post_create_scheduled_work_order_valid_data(self):
         self.client.force_login(self.user)
@@ -111,8 +114,8 @@ class CreateScheduledWorkOrderViewTest(TestCase):
             "next_scheduled_action_date": (
                 timezone.now() + timezone.timedelta(days=30)
             ).date(),
-            "last_serviced_at":"2024-03-27",
-            "work_order_num":87987987
+            "last_serviced_at": "2024-03-27",
+            "work_order_num": 87987987
         }
 
         response = self.client.post(self.url, data=valid_data)
@@ -128,12 +131,12 @@ class CreateScheduledWorkOrderViewTest(TestCase):
 
         work_order = ScheduledWorkOrder.objects.first()
         self.assertEqual(work_order.equipment, self.equipment)
-        self.assertEqual(work_order.scheduled_action, valid_data["scheduled_action"])
-        self.assertEqual(work_order.purchase_order, int(valid_data["purchase_order"]))
+        self.assertEqual(work_order.scheduled_action,
+                         valid_data["scheduled_action"])
+        self.assertEqual(work_order.purchase_order,
+                         int(valid_data["purchase_order"]))
         self.assertEqual(work_order.freq_interval, valid_data["freq_interval"])
         self.assertEqual(
             work_order.next_scheduled_action_date,
             valid_data["next_scheduled_action_date"],
         )
-
-

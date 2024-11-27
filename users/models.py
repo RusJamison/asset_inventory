@@ -5,6 +5,7 @@ from equipment.models import HealthFacility
 
 # Create your models here.
 
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password, **extra_fields):
         user = self.model(username=username, email=email, **extra_fields)
@@ -30,7 +31,8 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     is_verified = models.BooleanField(default=False)
-    health_facility = models.ForeignKey(HealthFacility, on_delete=models.CASCADE)
+    health_facility = models.ForeignKey(HealthFacility,
+                                        on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -41,4 +43,3 @@ class CustomUser(AbstractUser):
         return self.username
 
     objects = CustomUserManager()
-

@@ -14,26 +14,37 @@ from equipment.models import (
     HealthFacility,
     Manufacturer,
     Category,
-    ServiceProvider,    
+    ServiceProvider,
     Department
 )
+
 
 class EquipmentDetailsViewTest(TestCase):
     def setUp(self):
         # Create a test user
-        self.health_facility = HealthFacility.objects.create(name='Test Health Facility')
-        self.user = User.objects.create_user(username='testuser', password='password', email="testuser@example.com", health_facility = self.health_facility)
+        self.health_facility = HealthFacility.objects.create(
+             name='Test Health Facility')
+        self.user = User.objects.create_user(
+            username='testuser', password='password',
+            email="testuser@example.com",
+            health_facility=self.health_facility
+         )
         self.user.is_verified = True
         self.user.save()
 
-        self.manufacturer = Manufacturer.objects.create(name='Test Manufacturer')
+        self.manufacturer = Manufacturer.objects.create(
+            name='Test Manufacturer')
         self.category = Category.objects.create(name='Test Category')
-        self.service_provider = ServiceProvider.objects.create(name='Test Service Provider')
-        self.department = Department.objects.create(name="Radiology", health_facility=self.health_facility)
+        self.service_provider = ServiceProvider.objects.create(
+             name='Test Service Provider')
+        self.department = Department.objects.create(
+             name="Radiology",
+             health_facility=self.health_facility
+        )
 
         self.location = EquipmentLocation.objects.create(
             health_facility=self.health_facility,
-            department= self.department
+            department=self.department
         )
 
         # Create an Equipment instance
@@ -59,7 +70,10 @@ class EquipmentDetailsViewTest(TestCase):
         # Log in the user
         self.client.login(username='testuser', password='password')
 
-        response = self.client.get(reverse('equipment_details', args=[self.equipment.asset_tag]))
+        response = self.client.get(reverse(
+            'equipment_details',
+            args=[self.equipment.asset_tag]
+            ))
 
         self.assertEqual(response.status_code, 200)
 
@@ -67,13 +81,13 @@ class EquipmentDetailsViewTest(TestCase):
 
         self.assertEqual(response.context['equipment'], self.equipment)
         self.assertEqual(response.context['location'], self.equipment.location)
-        self.assertEqual(response.context['title'], f"Equipment Details - {self.equipment.name}")
+        self.assertEqual(response.context['title'],
+                         f"Equipment Details - {self.equipment.name}")
 
     def test_equipment_details_view_unauthenticated_user(self):
 
-        response = self.client.get(reverse('equipment_details', args=[self.equipment.asset_tag]))
+        response = self.client.get(reverse('equipment_details',
+                                           args=[self.equipment.asset_tag]))
 
         self.assertEqual(response.status_code, 302)
         self.assertIn('/accounts/login/', response.url)
-
-   

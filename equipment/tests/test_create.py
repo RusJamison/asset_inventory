@@ -15,7 +15,6 @@ from django.urls import reverse
 class EquipmentCreateViewTest(TestCase):
     def setUp(self):
         # Create a test user and log them in
-      
 
         # Create required related instances
 
@@ -30,9 +29,11 @@ class EquipmentCreateViewTest(TestCase):
 
         self.user.is_verified = True
         self.user.save()
-        self.manufacturer = Manufacturer.objects.create(name="Medical Supplies Inc.")
+        self.manufacturer = Manufacturer.objects.create(
+            name="Medical Supplies Inc.")
         self.category = Category.objects.create(name="Medical Devices")
-        self.health_facility = HealthFacility.objects.create(name="City Hospital")
+        self.health_facility = HealthFacility.objects.create(
+            name="City Hospital")
         self.service_provider = ServiceProvider.objects.create(
             name="TechCare Solutions"
         )
@@ -88,7 +89,6 @@ class EquipmentCreateViewTest(TestCase):
 
         response = self.client.post(self.url, post_data)
 
-
     def test_create_equipment_post_save_and_duplicate(self):
         self.client.force_login(self.user)
         post_data = {
@@ -113,11 +113,14 @@ class EquipmentCreateViewTest(TestCase):
         }
 
         response = self.client.post(self.url, post_data)
-
-        # Check if the response renders the form with prefilled data for duplication
+        '''
+        Check if the response renders the form with prefilled data for
+        duplication
+        '''
         self.assertEqual(response.status_code, 200)
         self.assertIn("form", response.context)
-        self.assertEqual(response.context["form"].initial["name"], "MRI Machine")
+        self.assertEqual(response.context["form"].initial["name"],
+                         "MRI Machine")
 
     def test_create_equipment_post_save_and_redirect(self):
         self.client.force_login(self.user)
@@ -143,5 +146,3 @@ class EquipmentCreateViewTest(TestCase):
         }
 
         response = self.client.post(self.url, post_data)
-
-        

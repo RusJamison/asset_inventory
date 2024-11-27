@@ -23,6 +23,12 @@ The Sign-Up process requires
 
 ![Mockup](documentation/images/amiresponsive.png)
 
+**Relationship Diagrams For DBMS**
+
+The Relationship diagram for the DBMS consists of the following tables: Manufacturer, Category, Health Facility, Service Provider, Department, Equipment Location, Equipment and CustomUser
+
+![Database Relationship](documentation/images/db-relationship.png)
+
 ## Index – Table of Contents
 * [User Experience (UX)](#user-experience-ux) 
 * [Features](#features)
@@ -189,7 +195,79 @@ The Sign-Up process requires
 
       The Relationship diagram for the DBMS consists of the following tables: Manufacturer, Category, Health Facility, Service Provider, Department, Equipment Location, Equipment and CustomUser
 
-      ![Django Admin](documentation/images/db.png)
+      ![DATABASE Relationship](documentation/images/db.png)
+
+-  **F16 Sign Up**
+
+      This platform required strict control over which users could access and add equipment, update equipment repairs, maintenance and event logs in the system. The user must register or sign in before access is granted to the site. The user register with a username, email, facility which the user has permission to access and password. The Site Admin will verify if the user has permission and allow permission to that facility only.
+
+      User sign Up
+
+      ![User Sign Up](documentation/images/sign-up.png)
+
+      User waiting for Site Admin Verification
+
+      ![Awaiting Verification](documentation/images/sign-up-verification.png)
+
+      Site Admin Verify User
+
+      ![User Verification](documentation/images/admin-sign-up-verification.png)
+
+      User Login to the site
+
+      ![User Login to site](documentation/images/sign-in-after-verification.png)
+
+      User View Equipment on the User Facility
+
+      ![Equipment on User Facility](documentation/images/view-facility-after-sign-in.png)
+
+## Design
+### Wireframe
+
+
+## Planning
+
+### User Stories and Kanban board can be accessed here
+    
+   [User Story](https://github.com/users/RusJamison/projects/1)
+
+
+## Technologies Used
+
+
+### Languages Used
+
+-   [HTML5](https://en.wikipedia.org/wiki/HTML5)
+-   [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+-   [Jquery](https://jquery.com/)
+-   [Python](https://www.python.org/)
+
+### Frameworks, Libraries & Programs Used
+
+-   [Google Fonts:](https://fonts.google.com/) used for the Lato font
+-   [Font Awesome:](https://fontawesome.com/) was used to add icons for aesthetic and UX purposes.
+-   [Git:](https://git-scm.com/) Version control by utilising the Gitpod terminal to commit to Git and Push to 
+           GitHub.
+-   [GitHub:](https://github.com/) Respository for the project code after being pushed from Git. 
+             GitHub was also used for User Stories (GitHub Issues) and tracking them on a Kanban board.
+-   [dbdiagram.io](https://dbdiagram.io/home) Entity Relationship diagrams for the application data model
+-   [Cloudinary](https://cloudinary.com/) image storage
+-   [Summernote](https://pypi.org/project/django-summernote/) used to provide WYSIWYG editing on the Hike editing screen
+-   [Django allauth](https://django-allauth.readthedocs.io/en/latest/index.html) used for account registration and authentication
+-   [Django crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/) used to simplify form rendering
+-   [jquery library](https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js) used to fade out alert messages
+-   [Django testing tools](https://docs.djangoproject.com/en/3.2/topics/testing/tools/) Python mvt testing
+-   [Jest](https://jestjs.io/) - used to test jquery in script.js
+-   [coverage](https://coverage.readthedocs.io/en/coverage-5.5/) checks how much of the python code has been covered by 
+               automated tests
+-   [Balsamiq:](https://balsamiq.com/) Create the wireframes during the design process.
+-   [Django](https://www.djangoproject.com/) Framework to support rapid and secure development of the application
+-   [Bootstrap](https://getbootstrap.com/) Used to build responsive web pages
+-   [Gunicorn](https://gunicorn.org/) Assist Web Server to run Django on Heroku
+-   [dj_database_url](https://pypi.org/project/dj-database-url/) library for database urls to connect to the Postgres db
+-   [psycopg2](https://pypi.org/project/psycopg2/) database adapter used to support Postgres db
+
+
 
 
  

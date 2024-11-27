@@ -26,6 +26,10 @@ from . import views
 def homepage(request):
     return render(request, 'home.html')
 
+def error_view(request):
+    raise Exception("This is a test error")
+    
+
 urlpatterns = [
     path('', homepage, name='homepage'),
     path('admin/', admin.site.urls),
@@ -34,6 +38,7 @@ urlpatterns = [
     path('work_orders/', include('work_orders.urls')),
     path("accounts/", include("allauth.urls")),
     path("users/", include("users.urls")),
+    path("error/", error_view)
    # path('auth/', include('auth.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 handler400 = views.custom_400

@@ -1,8 +1,15 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from equipment.models import Equipment, EquipmentLocation, Manufacturer, Category, ServiceProvider, HealthFacility, Department
-
+from equipment.models import (
+    Equipment,
+    EquipmentLocation,
+    Manufacturer,
+    Category,
+    ServiceProvider,
+    HealthFacility,
+    Department
+)
 User = get_user_model()
 
 
@@ -76,10 +83,12 @@ class EquipmentListViewTest(TestCase):
         self.user.is_active = True
         self.user.save()
 
-        self.superuser = User.objects.create_superuser(username='admin',
-                                                       password='adminpass',
-                                                       email="admin@gmail.com",
-                                                       health_facility=self.health_facility)
+        self.superuser = User.objects.create_superuser(
+            username='admin',
+            password='adminpass',
+            email="admin@gmail.com",
+            health_facility=self.health_facility
+            )
 
     def test_equipment_list_view_with_superuser(self):
         """Test equipment list view with superuser"""

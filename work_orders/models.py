@@ -38,7 +38,8 @@ class ScheduledWorkOrder(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Work Order for equipment {self.equipment.asset_tag} NO {self.work_order_num}"
+        return f"Work Order for equipment {self.equipment.asset_tag}\
+        NO {self.work_order_num}"
 
 
 class WorkOrderType(models.TextChoices):
@@ -72,6 +73,5 @@ class UnscheduledWorkOrder(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Work Order for equipment {self.equipment.asset_tag} NO {self.work_order_num}"
-
-
+        return f"Work Order for equipment {self.equipment.asset_tag}\
+        NO {self.work_order_num}"

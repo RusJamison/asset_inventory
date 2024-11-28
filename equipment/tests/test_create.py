@@ -1,5 +1,4 @@
 from equipment.models import (
-    Equipment,
     EquipmentLocation,
     ServiceProvider,
     Department,

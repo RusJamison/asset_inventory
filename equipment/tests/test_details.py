@@ -3,7 +3,6 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import get_user_model
 # Import your models
 from equipment.models import (

@@ -17,18 +17,7 @@ import sys
 if os.path.isfile('env.py'):
     import env
 
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-from cloudinary.utils import cloudinary_url
 
-# Configuration       
-#cloudinary.config( 
-    # cloud_name = os.environ.get("CLOUDINARY_CLOUDNAME"), 
-    # api_key = os.environ.get("CLOUDINARY_API_KEY"), 
-    # api_secret = os.environ.get("CLOUDINARY_API_SECRET"), # Click 'View API Keys' above to copy your API secret
-    # secure=True
-# )
 
 
 
@@ -68,12 +57,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'equipment',
-    #'accounts',
     'work_orders',
     'django_summernote',
     'cloudinary',
-    
-    #'auth',
     'crispy_forms',
     'crispy_bootstrap5',
     'users'
@@ -87,8 +73,7 @@ LOGOUT_REDIRECT_URL="/"
 ACCOUNT_SIGNUP_FORM_CLASS = "users.forms.CustomSignUpForm"
 ACCOUNT_ADAPTER ="users.adapters.AccountAdapter"
 SITE_ID = 1
-#LOGIN_REDIRECT_URL = '/'
-#LOGOUT_REDIRECT_URL = '/'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -187,8 +172,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-#CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 

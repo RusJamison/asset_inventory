@@ -20,8 +20,6 @@ class EquipmentAdmin(SummernoteModelAdmin):
 
 
 # Register your models here.
-
-# admin.site.register(Equipment)
 admin.site.register(Category)
 admin.site.register(Manufacturer)
 admin.site.register(HealthFacility)

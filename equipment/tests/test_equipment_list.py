@@ -10,7 +10,6 @@ from equipment.models import (
     ServiceProvider,
     EquipmentLocation
 )
-from work_orders.models import ScheduledWorkOrder, UnscheduledWorkOrder
 from datetime import date
 
 

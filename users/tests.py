@@ -1,7 +1,6 @@
 from django.test import TestCase
 from users.models import CustomUser as User
 from equipment.models import HealthFacility
-from django.urls import reverse
 import logging
 
 logger = logging.getLogger(__name__)
@@ -28,4 +27,4 @@ class UserTestCase(TestCase):
         logged_in = self.client.login(username="testuser", password="testpass")
         self.assertTrue(logged_in)
         self.assertTrue(self.user.is_active)
-        logger.info("User is active ".format(self.user.is_active))
+        logger.info("User is active ".format())

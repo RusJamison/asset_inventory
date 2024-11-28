@@ -1,4 +1,4 @@
-from .models import Equipment, Department
+from .models import Equipment
 from django import forms
 
 

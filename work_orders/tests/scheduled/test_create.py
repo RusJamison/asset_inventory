@@ -1,4 +1,4 @@
-from django.test import TestCase, Client
+from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils import timezone
@@ -20,7 +20,6 @@ from equipment.models import (
     EquipmentLocation,
 )
 from equipment.forms import EquipmentCreationForm
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 

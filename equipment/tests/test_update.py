@@ -14,7 +14,6 @@ from equipment.models import (
     Category,
     ServiceProvider,
 )
-from equipment.forms import EquipmentUpdateForm
 
 logger = logging.getLogger(__name__)
 

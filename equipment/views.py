@@ -7,34 +7,27 @@ from .forms import (
 )
 import logging
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from .utils import search_all_models_full_text
 from django.core.paginator import Paginator
 
-# Create your views here.
-
-# 1. function to render the page (view)
-# 2. map function to A URL
-
-logger = logging.getLogger(__name__)
-
-import logging
-from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
-from django.shortcuts import render
 from django.http import HttpResponse
-from reportlab.lib.pagesizes import letter, A4
-from reportlab.pdfgen import canvas
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    Table,
+    TableStyle,
+)
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
-from .models import Equipment
 from io import BytesIO
+
 # import requests
-from django.conf import settings
 
 
 logger = logging.getLogger(__name__)
+
 
 @login_required()
 def generate_equipment_pdf(request):
@@ -49,9 +42,9 @@ def generate_equipment_pdf(request):
 
     # Get sample styles
     styles = getSampleStyleSheet()
-    title_style = styles['Title']
-    header_style = styles['Heading2']
-    normal_style = styles['BodyText']
+    title_style = styles["Title"]
+    header_style = styles["Heading2"]
+    normal_style = styles["BodyText"]
 
     # Add Title
     title = Paragraph("Equipment List", title_style)
@@ -59,7 +52,8 @@ def generate_equipment_pdf(request):
     elements.append(Spacer(1, 12))
 
     # Add a description or any introductory text
-    intro_text = "This document contains a list of all equipment in the inventory."
+    intro_text = "This document contains a list of all\
+         equipment in the inventory."
     intro_paragraph = Paragraph(intro_text, normal_style)
     elements.append(intro_paragraph)
     elements.append(Spacer(1, 12))
@@ -69,38 +63,56 @@ def generate_equipment_pdf(request):
     if user.is_superuser:
         equipments = Equipment.objects.all()
     else:
-        equipments = Equipment.objects.filter(location__health_facility=user.health_facility).all().order_by('-created_at')
+        equipments = (
+            Equipment.objects.filter(
+                location__health_facility=user.health_facility)
+            .all()
+            .order_by("-created_at")
+        )
 
     # Define table data with headers
     table_data = [
-        ['Asset Tag', 'Name', 'Model', 'Serial No', 'Price', 'Status', 'Location']
+        [
+            "Asset Tag",
+            "Name",
+            "Model",
+            "Serial No",
+            "Price",
+            "Status",
+            "Location"]
     ]
 
     # Populate table data
     for equipment in equipments:
-        table_data.append([
-            equipment.asset_tag,
-            equipment.name,
-            equipment.model,
-            equipment.serial_no,
-            f"${equipment.price}",
-            equipment.status,
-            equipment.location.health_facility if equipment.location else "N/A",
-        ])
+        table_data.append(
+            [
+                equipment.asset_tag,
+                equipment.name,
+                equipment.model,
+                equipment.serial_no,
+                f"${equipment.price}",
+                equipment.status,
+                equipment.location.health_facility if equipment.location else "N/A",
+            ]
+        )
 
     # Create the table
-    #c_width = [0.5*inch, 1.5*inch, 1.5*inch, 0.5*inch,0.5*inch, 0.5*inch, 1.5*inch]
-    table = Table(table_data, repeatRows=1,) #rowHeights=20, colwidths=c_width)
+    table = Table(
+        table_data,
+        repeatRows=1,
+    )
 
     # Style the table
-    table_style = TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#d3d3d3")),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.green),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('GRID', (0, 0), (-1, -1), 0.5, colors.green),
-    ])
+    table_style = TableStyle(
+        [
+            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#d3d3d3")),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.green),
+            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("BOTTOMPADDING", (0, 0), (-1, 0), 12),
+            ("GRID", (0, 0), (-1, -1), 0.5, colors.green),
+        ]
+    )
     table.setStyle(table_style)
 
     # Alternate row colors
@@ -109,11 +121,10 @@ def generate_equipment_pdf(request):
             bg_color = colors.whitesmoke
         else:
             bg_color = colors.lightgrey
-        table_style.add('BACKGROUND', (0, i), (-1, i), bg_color)
+        table_style.add("BACKGROUND", (0, i), (-1, i), bg_color)
 
     elements.append(table)
     elements.append(Spacer(1, 24))
-
 
     # Build the PDF
     doc.build(elements)
@@ -121,23 +132,25 @@ def generate_equipment_pdf(request):
     # Get the value of the BytesIO buffer and write it to the response.
     pdf = buffer.getvalue()
     buffer.close()
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="equipment_list.pdf"'
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; \
+        filename="equipment_list.pdf"'
     response.write(pdf)
     return response
-
 
 
 @login_required()
 def equipment_list(request):
     user = request.user
     if user.is_superuser:
-        equipment_list = Equipment.objects.all() 
+        equipment_list = Equipment.objects.all()
     else:
-        equipment_list = Equipment.objects.filter(location__health_facility=user.health_facility).all()
+        equipment_list = Equipment.objects.filter(
+            location__health_facility=user.health_facility
+        ).all()
     print(equipment_list)
     paginator = Paginator(equipment_list, 5)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {"title": "Home Page", "page_obj": page_obj}
     return render(request, "equipment/index.html", context=context)
@@ -147,7 +160,7 @@ def equipment_list(request):
 def create_equipment(request):
     form = EquipmentCreationForm()
     facility = request.user.health_facility
-    departments = Department.objects.filter(health_facility= facility).all()
+    departments = Department.objects.filter(health_facility=facility).all()
 
     if request.method == "POST":
         form = EquipmentCreationForm(request.POST, request.FILES)
@@ -192,7 +205,11 @@ def create_equipment(request):
                     "departments": departments,
                     "facility": facility,
                 }
-                return render(request, "equipment/create.html", context=context)
+                return render(
+                    request,
+                    "equipment/create.html",
+                    context=context
+                )
 
             else:
 
@@ -201,11 +218,11 @@ def create_equipment(request):
         print(form.errors)
 
     context = {
-                    "title": "Create Equipment",
-                    "form": form,
-                    "departments": departments,
-                    "facility": facility,
-                }
+        "title": "Create Equipment",
+        "form": form,
+        "departments": departments,
+        "facility": facility,
+    }
     return render(request, "equipment/create.html", context=context)
 
 
@@ -227,7 +244,9 @@ def update_equipment(request, asset_tag):
     facility = request.user.health_facility
     facilities = HealthFacility.objects.all()
 
-    departments_in_facility = Department.objects.filter(health_facility=facility).all()
+    departments_in_facility = Department.objects.filter(
+        health_facility=facility
+    ).all()
     all_departments = Department.objects.all()
 
     form = EquipmentUpdateForm(instance=equipment)
@@ -237,13 +256,16 @@ def update_equipment(request, asset_tag):
         facility_id = request.POST.get("facilities")
         print(f"Facility_id>>>{request.POST}")
 
-
         department = Department.objects.get(id=department_id)
 
         print(f"Department >>>{department}")
         facility = HealthFacility.objects.get(id=facility_id)
 
-        form = EquipmentUpdateForm(request.POST, request.FILES, instance=equipment)
+        form = EquipmentUpdateForm(
+            request.POST,
+            request.FILES,
+            instance=equipment
+        )
 
         if form.is_valid():
             equipment = form.save(commit=False)
@@ -260,7 +282,7 @@ def update_equipment(request, asset_tag):
         "facility_depts": departments_in_facility,
         "facility": facility,
         "facilities": facilities,
-                }
+    }
     return render(request, "equipment/update.html", context=context)
 
 
@@ -289,28 +311,10 @@ def search_view(request):
         print(all_items)
         results = all_items
     else:
-        results = Equipment.objects.none()  # return empty queryset if no search term
+        # return empty queryset if no search term
+        results = Equipment.objects.none()
 
     return render(
-        request, "equipment/search_results.html", {"query": query, "results": results}
+        request, "equipment/search_results.html",
+        {"query": query, "results": results}
     )
-
-
-# def about(request):
-#    context = {"title": "About"}
-#    return render(request, "equipment/about.html", context=context)
-
-
-# def contact(request):
-#    context = {"title": "Contact"}
-# return render(request, "equipment/contact.html", context=context)
-
-
-# def equipment_list(request):
-# context = {}
-# return render(request, "equipment/list.html", context=context)
-
-
-# !. Model (Database)
-# 2. Views (Functions request into responses)
-# 3. Temaplates (HTML templates)

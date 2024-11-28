@@ -17,15 +17,20 @@ def search_all_models_full_text(term):
                 "description",
             )
         ).filter(search=search_query),
-        "Department": Department.objects.annotate(search=SearchVector("name")).filter(
+        "Department": Department.objects.annotate(
+             search=SearchVector("name")).filter(
             search=search_query
         ),
         "ScheduledWorkOrder": ScheduledWorkOrder.objects.annotate(
             search=SearchVector("work_order_num", "purchase_order")
         ).filter(search=search_query),
         "UnscheduledWorkOrder": UnscheduledWorkOrder.objects.annotate(
-            search=SearchVector("work_order_num", "purchase_order", "problem", "update")
+            search=SearchVector(
+                "work_order_num",
+                "purchase_order",
+                "problem",
+                "update"
+                )
         ).filter(search=search_query),
-        # Add additional models with relevant fields here
     }
     return results

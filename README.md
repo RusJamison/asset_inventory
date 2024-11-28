@@ -222,9 +222,31 @@ The Relationship diagram for the DBMS consists of the following tables: Manufact
       ![Equipment on User Facility](documentation/images/view-facility-after-sign-in.png)
 
 ## Design
-### Wireframe
 
+-   ### Wireframe
 
+      The wireframe showing how to add equipment, update equipment, add preventative maintenace to equipment and add a repair job to the equipment is shown below.
+
+      <details>
+      <summary>Add Equipment Wireframes</summary>
+
+      ![Desktop Wireframes](documentation/wireframes/add-equipment-wireframe.png)
+      </details>
+      <details>
+      <summary>Update Equipment Wireframes</summary>
+
+      ![Desktop Wireframes](documentation/wireframes/update-equipment-wireframe.png)
+      </details>
+      <details>
+      <summary>Add PM Wireframes</summary>
+
+      ![Desktop Wireframes](documentation/wireframes/add-PM-wireframe.png)
+      </details>
+      <details>
+      <summary>Add Repair Wireframes</summary>
+
+      ![Desktop Wireframes](documentation/wireframes/add-repair-wireframe.png)
+      </details>
 ## Planning
 
 ### User Stories and Kanban board can be accessed here
@@ -252,13 +274,10 @@ The Relationship diagram for the DBMS consists of the following tables: Manufact
              GitHub was also used for User Stories (GitHub Issues) and tracking them on a Kanban board.
 -   [dbdiagram.io](https://dbdiagram.io/home) Entity Relationship diagrams for the application data model
 -   [Cloudinary](https://cloudinary.com/) image storage
--   [Summernote](https://pypi.org/project/django-summernote/) used to provide WYSIWYG editing on the Hike editing screen
+-   [Summernote](https://pypi.org/project/django-summernote/) used for reports
 -   [Django allauth](https://django-allauth.readthedocs.io/en/latest/index.html) used for account registration and authentication
--   [Django crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/) used to simplify form rendering
--   [jquery library](https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js) used to fade out alert messages
--   [Django testing tools](https://docs.djangoproject.com/en/3.2/topics/testing/tools/) Python mvt testing
--   [Jest](https://jestjs.io/) - used to test jquery in script.js
--   [coverage](https://coverage.readthedocs.io/en/coverage-5.5/) checks how much of the python code has been covered by 
+-   [Django crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/) used for forms
+-   [coverage](https://coverage.readthedocs.io/en/coverage-5.5/) used to check how much of the python code has been covered by 
                automated tests
 -   [Balsamiq:](https://balsamiq.com/) Create the wireframes during the design process.
 -   [Django](https://www.djangoproject.com/) Framework to support rapid and secure development of the application
@@ -266,6 +285,22 @@ The Relationship diagram for the DBMS consists of the following tables: Manufact
 -   [Gunicorn](https://gunicorn.org/) Assist Web Server to run Django on Heroku
 -   [dj_database_url](https://pypi.org/project/dj-database-url/) library for database urls to connect to the Postgres db
 -   [psycopg2](https://pypi.org/project/psycopg2/) database adapter used to support Postgres db
+
+
+## Testing
+
+### Validator Testing 
+
+
+
+
+### Automated Testing
+
+- 23 tests were written for automated testing. Below are the coverage html report of the tests.
+- Django test results and coverage :   
+    ![Python Test Results](documentation/testing/results/coverage-html-report-top-page.png)
+
+    ![Python Test Results](documentation/testing/results/coverage-html-report-bottom-page.png)
 
 
 

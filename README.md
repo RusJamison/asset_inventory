@@ -538,6 +538,46 @@ Steps below show how to clone this project repository, configure and deploy the 
 
     README by Elaine Broche(https://github.com/elainebroche-dev/pf4-wayfarers-guided-hikes)
 
+    Tools for Writing, Sizing, and Validating User Stories including Well-Defined Acceptance Criteria and Gherkin Scenarios
+    by Tom and Angela Hathaway (https://www.udemy.com/course/writing-effective-user-stories/learn/lecture/)
+
+    Generate Dynamically PDF files using Python and ReportLab
+    by Hugo Ferro (https://www.udemy.com/course/python-reportlab-from-beginner-to-winner/learn)
+
+    Master Python Django 5.0: Learn Django (Core + Advanced Concepts), Behind-the-Scenes, Projects, Boost Career With AI
+    by Taranjot Singh (https://www.udemy.com/course/django-complete-course/learn)
+
+    Every Python Programmer Must Have This Skill!!
+    by Coding Gears | Train Your Brain (https://www.udemy.com/course/python-unit-testing-fundamentals/learn)
+
+    Take the next step in your Python development by leveraging the power of PostgreSQL and databases!
+    by Jose Salvatierra (https://www.udemy.com/course/complete-python-postgresql-database-course/learn)
+
+    Learn the entire technology stack to create beautiful and responsive websites with Python and Django!
+    by Jose Portilla (https://www.udemy.com/course/django-and-python-full-stack-developer-masterclass/learn)
+
+    Build 3 stunning websites, learn Back and Front End Web Development, deploy your site with HTML5, CSS3 and Bootstrap 4
+    by Nick Walter (https://www.udemy.com/course/django-3-make-websites-with-python-tutorial-beginner-learn-bootstrap/learn/)
+
+    Django Masterclass : Build 9 Real World Django Projects
+    by Ashutosh Pawar (https://www.udemy.com/course/django-course/learn/)
+
+    Master Django and Create Python Web Applications in Simple Steps
+    by Bharath Thippireddy (https://www.udemy.com/course/django-for-python-developers/learn)
+
+    Learn SQL From Scratch Using MySQL Databases, A Complete SQL Course For Beginners
+    by Ashutosh Pawar (https://www.udemy.com/course/sqlcourse/learn/) 
+
+    Master Bootstrap 4 and build 5 real world themes while learning HTML5 semantics & CSS3
+    by Brad Traversy (https://www.udemy.com/course/bootstrap-4-from-scratch-with-5-projects/learn)
+
+    Learn Python and build & deploy a real estate application using the Django framework & PostgreSQL
+    by Brad Traversy (https://www.udemy.com/course/python-django-dev-to-deployment/learn/)
+
+    Learn the basics of Balsamiq Wireframes, an invaluable tool for creating rapid user interface wireframes.
+    by Leon Barnard (https://www.udemy.com/course/getting-started-with-balsamiq-wireframes/learn)
+
+
 
 
 

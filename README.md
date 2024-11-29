@@ -225,6 +225,32 @@ The Relationship diagram for the DBMS consists of the following tables: Manufact
 
       ![Equipment on User Facility](documentation/images/add-equipment-from-admin.png)
 
+### Features which could be implemented in the future
+
+-   __Contracts Application__
+    
+    The contracts application will be linked to the Scheduled work orders and unscheduled work orders so that renewing of contracts is co-ordinated.
+
+-   __Work Orders Generation__
+
+    A feature to generate scheduled work orders will be added so that the user by a click of a button will automatically know which equipment is due for a service next week / next month. This will help to free the equipment due for service.
+
+-   __Equipment Overdue for Service__
+
+    A feature to pop up showing equipment which is overdue for service and to allow the user to add a two week grace period as an extension of the service history.
+
+-   __Graphical Represantation of Equipment Statistics__
+
+    A graphical represantation is required by managers to quickly access equipment information, work carried inhouse, work carried by external companies. Work to be serviced next month, total repairs and cost. Equipment over international standard of 8 years which need to be replaced and the cost.
+
+-   __More Permission for different groups__
+
+    There are many groups of staff in facilities and hospitals with different equipment information interest. Due to time these groups were not fully covered in this project but will be covered in the future.
+
+
+
+
+
 
 ## Design
 
@@ -438,7 +464,7 @@ The Relationship diagram for the DBMS consists of the following tables: Manufact
 
 ### Automated Testing
 
-- 23 tests were written for automated testing. Below are the coverage html report of the tests.
+- 23 tests were tested for automated testing. Below are the coverage html report of the tests.
 - Django test results and coverage :   
     ![Python Test Results](documentation/testing/results/coverage-html-report-top-page.png)
 
@@ -576,6 +602,33 @@ Steps below show how to clone this project repository, configure and deploy the 
 
     Learn the basics of Balsamiq Wireframes, an invaluable tool for creating rapid user interface wireframes.
     by Leon Barnard (https://www.udemy.com/course/getting-started-with-balsamiq-wireframes/learn)
+
+    Unit Testing in Django by Leticia Portella (https://www.linkedin.com/learning/unit-testing-in-django)
+
+    Advanced Django Project: Build High-Traffic Websites with Django by Ryan Mitchell (https://www.linkedin.com/learning/advanced-django-project-build-high-traffic-websites-with-django)
+
+    Django Essential Training by Leticia Portella (https://www.linkedin.com/learning/django-essential-training) 
+
+    Full Stack Web Development with Flask by Christian Hur (https://www.linkedin.com/learning/full-stack-web-development-with-flask)
+
+    Learning Django by  Caleb Smith (https://www.linkedin.com/learning/learning-django-2)
+
+    Start the UX Design Process: Empathize, Define, and Ideate by Google (https://www.coursera.org/learn/start-ux-design-process)
+
+    Django Web Framework by Meta (https://www.coursera.org/learn/django-web-framework/)
+
+    Back-End Developer Capstone by Meta (https://www.coursera.org/learn/back-end-developer-capstone)
+
+    Building Web Applications in Django by University of Michigan (https://www.coursera.org/learn/django-build-web-apps)
+
+    Python Functions, Files, and Dictionaries by University of Michigan (https://www.coursera.org/learn/python-functions-files-dictionaries)
+
+    The Power of Object-Oriented Programming by University of Michigan (https://www.coursera.org/learn/the-power-of-object-oriented-programming) 
+
+    (https://www.pexels.com/) 
+
+
+
 
 
 

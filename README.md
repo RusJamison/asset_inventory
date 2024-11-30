@@ -340,7 +340,18 @@ The Relationship diagram for the DBMS consists of the following tables: Manufact
         ![Validation URL check without errors - Summary](documentation/testing/validation/html-url-validation-check.png)
       </details>
 
-    - [Python Validator](https://pep8ci.herokuapp.com/)
+- [CSS Validator](https://jigsaw.w3.org/css-validator/)
+
+  - <details>
+      <summary>style.css validation results</summary>
+
+      ![style.css](documentation/testing/validation/core-main.css.png)
+    </details>
+
+![JSHint JavaScript Validator](https://jshint.com/) clear warnings using New JavaScript features (ES6)
+
+
+- [Python Validator](https://pep8ci.herokuapp.com/)
 
   <details>
     <summary>project urls.py validation results</summary>

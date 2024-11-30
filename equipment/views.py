@@ -84,16 +84,15 @@ def generate_equipment_pdf(request):
 
     # Populate table data
     for equipment in equipments:
-        table_data.append(
-            [
-                equipment.asset_tag,
-                equipment.name,
-                equipment.model,
-                equipment.serial_no,
-                f"${equipment.price}",
-                equipment.status,
-                equipment.location.health_facility if equipment.location else "N/A",
-            ]
+        table_data.append([
+          equipment.asset_tag,
+          equipment.name,
+          equipment.model,
+          equipment.serial_no,
+          f"${equipment.price}",
+          equipment.status,
+          equipment.location.health_facility if equipment.location else "N/A",
+        ]
         )
 
     # Create the table

@@ -25,7 +25,7 @@
         <tr>
             <td>{{ work_order.equipment.asset_tag}}</td>
             <td>{{ work_order.equipment.serial_no}}</td>
-            <td><a href="{% url 'edit_equipment' asset_tag=work_order.equipment.asset_tag %}">{{ work_order.equipment.name }}</a></td>
+            <td>{{ work_order.equipment.name }}</td>
             <td>{{ work_order.equipment.description }}</td>
             <td>{{ work_order.work_order_num}}</td>
             <td>{{ work_order.problem}}</td>

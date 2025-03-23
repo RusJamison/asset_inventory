@@ -510,9 +510,9 @@ The Relationship diagram for the DBMS consists of the following tables: Manufact
 | US17: Assign Manufacturers and Categories           | international nomenclature for equipment List of manufacturers                                                                                                                                                                                                                                                                                                                                                             | Go to the landing page<br>Sign in if you are registered as the Site Admin Click Admin tab<br>Add categories Add manufacturers<br>Add facilities and department<br>Add service providers                                                                                                                                                                                                                                                                                                                                                                                           | The fields are prepopulated with field options. This allows different facilities to adopt same naming<br>The user can see their facilities and departments The user can see categories and service providers<br>The site Admin manage to add categories, manufacturers, facilities, departments and service providers                                                                                                                        | Pass   |
 
 
+## SECRET_KEY
 
-
-
+Generate a SECRET_KEY the previously exposed value SECRET_KEY is no longer in use and has been replaced with a new value
 
 ## Deployment
 
